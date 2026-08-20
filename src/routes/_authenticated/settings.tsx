@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState } from "react";
 import { AppShell } from "@/components/AppShell";
 import { Button, Card, PageHeader } from "@/components/ui/primitives";
@@ -51,7 +51,8 @@ function fmt(date: string | null, lang: string) {
 
 function SettingsPage() {
   const { t, lang } = useLang();
-  const { user, profile } = useAuth();
+  const { user, profile, signOut } = useAuth();
+  const router = useRouter();
   const { sub, isPro, subscribe, buyAssessment, cancel, resume } = useSubscription();
   const [confirming, setConfirming] = useState(false);
   const [justUpgraded, setJustUpgraded] = useState(false);
@@ -73,6 +74,18 @@ function SettingsPage() {
             <dd className="truncate">{user?.email ?? "—"}</dd>
           </div>
         </dl>
+
+        <Button
+          variant="outline"
+          size="sm"
+          className="mt-4"
+          onClick={async () => {
+            await signOut();
+            await router.navigate({ to: "/auth", replace: true });
+          }}
+        >
+          {t("signOut")}
+        </Button>
 
         <section className="mt-10">
           <div className="flex flex-wrap items-baseline justify-between gap-2">

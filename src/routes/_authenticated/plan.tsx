@@ -28,7 +28,22 @@ function PlanPage() {
   const { t } = useLang();
   const { state, hydrated } = useStore();
 
-  if (hydrated && !state.planned) {
+  if (!hydrated) {
+    return (
+      <AppShell>
+        <div className="space-y-4 py-6" aria-busy="true" aria-label={t("loading")}>
+          <div className="h-6 w-40 animate-pulse rounded bg-secondary" />
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[0, 1, 2, 3].map((i) => (
+              <div key={i} className="h-40 animate-pulse rounded-lg bg-secondary" />
+            ))}
+          </div>
+        </div>
+      </AppShell>
+    );
+  }
+
+  if (!state.planned) {
     return (
       <AppShell>
         <div className="mx-auto max-w-md py-16 text-center">

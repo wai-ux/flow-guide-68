@@ -46,6 +46,7 @@ function AuthPage() {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState<null | "email" | "google" | "demo">(null);
   const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
 
   useEffect(() => {
     if (!loading && session) void router.navigate({ to: "/dashboard", replace: true });
@@ -54,6 +55,7 @@ function AuthPage() {
   async function onEmailSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setNotice("");
     const parsed = credentials.safeParse({ email, password, name });
     if (!parsed.success) {
       setError(t("authInvalid"));
@@ -62,7 +64,7 @@ function AuthPage() {
     setBusy("email");
     try {
       if (mode === "signup") {
-        const { error: err } = await supabase.auth.signUp({
+        const { data, error: err } = await supabase.auth.signUp({
           email: parsed.data.email,
           password: parsed.data.password,
           options: {
@@ -71,6 +73,7 @@ function AuthPage() {
           },
         });
         if (err) throw err;
+        if (!data.session) setNotice(t("checkEmail"));
       } else {
         const { error: err } = await supabase.auth.signInWithPassword({
           email: parsed.data.email,
@@ -213,6 +216,12 @@ function AuthPage() {
           {error && (
             <p role="alert" className="rounded-md border border-border bg-secondary px-3 py-2 text-[0.8125rem] text-foreground">
               {error}
+            </p>
+          )}
+
+          {notice && (
+            <p role="status" className="rounded-md border border-primary/40 bg-primary/5 px-3 py-2 text-[0.8125rem] text-foreground">
+              {notice}
             </p>
           )}
 
