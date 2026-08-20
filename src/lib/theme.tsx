@@ -6,12 +6,11 @@ type Ctx = { mode: Mode; toggle: () => void };
 const ThemeContext = createContext<Ctx | null>(null);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [mode, setMode] = useState<Mode>("light");
+  const [mode, setMode] = useState<Mode>("dark");
 
   useEffect(() => {
     const stored = localStorage.getItem("gk-theme");
     if (stored === "dark" || stored === "light") setMode(stored);
-    else if (window.matchMedia("(prefers-color-scheme: dark)").matches) setMode("dark");
   }, []);
 
   useEffect(() => {
