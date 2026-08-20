@@ -60,7 +60,7 @@ function Today() {
     );
   }
 
-  const focusConcept = focusTopic ? flatConcepts(focusTopic)[0] : undefined;
+  
   const gapTopics = topics.filter((tp) => flatConcepts(tp).some((c) => state.gaps.includes(c.id)));
 
   return (
