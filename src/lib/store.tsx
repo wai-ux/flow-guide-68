@@ -1,5 +1,7 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { topics, type Bucket, type Topic } from "./content";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "./auth";
 
 export type Resource = { id: string; name: string; kind: "file" | "link" };
 
