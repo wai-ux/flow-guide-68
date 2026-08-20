@@ -249,6 +249,25 @@ export const dict: Dict = {
   cancelPlan: { en: "Cancel subscription", mm: "အသင်းဝင်မှု ရပ်" },
   resumePlan: { en: "Resume subscription", mm: "အသင်းဝင်မှု ပြန်စ" },
   proBadge: { en: "Pro", mm: "Pro" },
+  planOneTime: { en: "One-time AI assessment", mm: "တစ်ကြိမ်သာ AI အဆင့်စစ်ဆေးမှု" },
+  oneTimeTag: { en: "one-time", mm: "တစ်ကြိမ်သာ" },
+  featOne1: { en: "One full AI assessment of your material", mm: "သင့်စာမေးမှုအားလုံးအတွက် AI အဆင့်စစ်ဆေးမှု တစ်ကြိမ်" },
+  featOne2: { en: "Prioritised plan: urgent, priority, foundation, later", mm: "အရေးပေါ်၊ ဦးစား၊ အခြေခံ၊ နောက်မှ အစီအစဉ်" },
+  featOne3: { en: "One learning branch with understanding check", mm: "နားလည်မှု စစ်ဆေးမှုပါ သင်ယူမှုခွဲ ၁ ခု" },
+  featOne4: { en: "No subscription, no auto-renewal", mm: "အသင်းဝင်ခ မလို၊ အလိုအလျောက် မတိုးပါ" },
+  buyOneTime: { en: "Buy once for {price}", mm: "{price} နှင့် တစ်ကြိမ်သာ ဝယ်ပါ" },
+  confirmOneTime: {
+    en: "You will be charged {price} once. Nothing renews.",
+    mm: "{price} တစ်ကြိမ်သာ ကောက်ခံပါမည်။ သက်တမ်း မတိုးပါ။",
+  },
+  confirmBuy: { en: "Confirm and pay", mm: "အတည်ပြု၍ ပေးရန်" },
+  oneTimeSuccess: {
+    en: "Your one-time AI assessment is unlocked.",
+    mm: "သင့် တစ်ကြိမ်သာ AI အဆင့်စစ်ဆေးမှု ဖွင့်ပြီးပါပြီ။",
+  },
+  oneTimeOwned: { en: "Purchased on {date} · 1 assessment available", mm: "{date} တွင် ဝယ်ပြီး · အဆင့်စစ်ဆေးမှု ၁ ခု ရနိုင်" },
+  oneTimeIncluded: { en: "Included in your Pro plan.", mm: "သင့် Pro အစီအစဉ်တွင် ပါဝင်ပြီးပါပြီ။" },
+
   upgrade: { en: "Upgrade", mm: "အဆင့်တင်" },
   getStarted: { en: "Get started", mm: "စတင်ပါ" },
   stepPrioritise: {
