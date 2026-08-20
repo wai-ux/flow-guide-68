@@ -383,3 +383,28 @@ export function flatConcepts(topic: Topic): Concept[] {
   walk(topic.concepts);
   return out;
 }
+
+/** Ancestor chain (root → concept) for a concept id, empty when not found. */
+export function conceptPath(topic: Topic, id: string): Concept[] {
+  const walk = (cs: Concept[], trail: Concept[]): Concept[] | null => {
+    for (const c of cs) {
+      const next = [...trail, c];
+      if (c.id === id) return next;
+      if (c.children) {
+        const found = walk(c.children, next);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+  return walk(topic.concepts, []) ?? [];
+}
+
+export function conceptDepth(topic: Topic, id: string) {
+  return Math.max(0, conceptPath(topic, id).length - 1);
+}
+
+export function subConcepts(topic: Topic, id: string): Concept[] {
+  const path = conceptPath(topic, id);
+  return path[path.length - 1]?.children ?? [];
+}
