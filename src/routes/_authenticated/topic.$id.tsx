@@ -64,7 +64,6 @@ function TopicPage() {
   const pct = topicProgress(topic);
 
   const path = conceptPath(topic, active.id);
-  const level = Math.max(1, path.length);
   const stepIndex = all.findIndex((c) => c.id === active.id);
   const doneCount = all.filter((c) => state.concepts[c.id] === "understood").length;
   const remaining = all.length - doneCount;
@@ -96,7 +95,6 @@ function TopicPage() {
           )}
         </div>
         <h1 className="mt-3 text-2xl sm:text-3xl">{L(topic.title)}</h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">{L(topic.why)}</p>
         <div className="mt-4 flex max-w-sm items-center gap-3">
           <Progress value={pct} className="flex-1" />
           <span className="shrink-0 whitespace-nowrap text-[0.6875rem] font-semibold tabular-nums text-muted-foreground">
@@ -124,14 +122,13 @@ function TopicPage() {
                 ))}
               </nav>
               <span className="text-[0.6875rem] font-semibold tabular-nums text-muted-foreground">
-                {t("stepOf")} {stepIndex + 1}/{all.length} · {t("levelLabel")} {level}
+                {stepIndex + 1}/{all.length}
               </span>
             </div>
 
             <h2 id="branch-title" className="mt-3 text-lg leading-snug">
               {L(active.title)}
             </h2>
-            <p className="mt-1 text-[0.8125rem] text-muted-foreground">{L(active.question)}</p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{L(active.summary)}</p>
             <p className="mt-3 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
               {active.minutes} {t("minutes")} ·{" "}
@@ -140,7 +137,7 @@ function TopicPage() {
 
             <div className="mt-6 gk-rule pt-5">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <p className="gk-eyebrow">{t("sources")}</p>
+                <p className="gk-eyebrow">1 · {t("sources")}</p>
                 {activeSources.length > 2 && (
                   <button
                     onClick={() => setShowAllSources((v) => !v)}
@@ -150,7 +147,6 @@ function TopicPage() {
                   </button>
                 )}
               </div>
-              <p className="mt-1.5 text-[0.75rem] text-muted-foreground">{t("sourcesHelp")}</p>
               <div className="mt-2 space-y-1">
                 {(showAllSources ? activeSources : activeSources.slice(0, 2)).map((s) => (
                   <SourceRow key={s.id} source={s} />
@@ -160,8 +156,7 @@ function TopicPage() {
 
             {kids.length > 0 && (
               <div className="mt-5 gk-rule pt-5">
-                <p className="gk-eyebrow">{t("deeperBranches")}</p>
-                <p className="mt-1.5 text-[0.75rem] text-muted-foreground">{t("deeperHelp")}</p>
+                <p className="gk-eyebrow">2 · {t("deeperBranches")}</p>
                 <ul className="mt-3 space-y-2">
                   {kids.map((k) => {
                     const ks = state.concepts[k.id] ?? "todo";
@@ -187,14 +182,17 @@ function TopicPage() {
               </div>
             )}
 
-            <div className="mt-5 flex flex-wrap items-center gap-2">
-              <Button
-                variant={status === "todo" ? "outline" : "quiet"}
-                onClick={() => setConcept(active.id, status === "todo" ? "studied" : "todo")}
-              >
-                {status === "todo" ? t("markRead") : `✓ ${t("studied")}`}
-              </Button>
-              <Button onClick={() => setChecking(true)}>{t("check")}</Button>
+            <div className="mt-5 gk-rule pt-5">
+              <p className="gk-eyebrow">3 · {t("check")}</p>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <Button
+                  variant={status === "todo" ? "outline" : "quiet"}
+                  onClick={() => setConcept(active.id, status === "todo" ? "studied" : "todo")}
+                >
+                  {status === "todo" ? t("markRead") : `✓ ${t("studied")}`}
+                </Button>
+                <Button onClick={() => setChecking(true)}>{t("check")}</Button>
+              </div>
             </div>
 
             <div className="mt-4 flex items-center justify-between gap-2 gk-rule pt-4">
@@ -209,7 +207,6 @@ function TopicPage() {
             {remaining === 0 && (
               <div className="mt-4 rounded-lg border border-primary/30 bg-primary/8 p-4" aria-live="polite">
                 <p className="text-[0.875rem] font-semibold">{t("branchDone")}</p>
-                <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">{t("branchDoneBody")}</p>
               </div>
             )}
           </Card>
@@ -221,7 +218,6 @@ function TopicPage() {
             <h2 id="tree-title" className="gk-eyebrow">
               {t("branch")}
             </h2>
-            <p className="mt-1.5 text-[0.75rem] leading-relaxed text-muted-foreground">{t("branchHelp")}</p>
             <div className="mt-3">
               <LearningTree concepts={topic.concepts} activeId={active.id} onSelect={setActiveId} />
             </div>

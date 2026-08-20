@@ -84,9 +84,6 @@ function Nodes({
                 <StatusDot status={status} />
                 <span className="min-w-0">
                   <span className="block text-[0.8125rem] font-semibold leading-snug">{L(c.title)}</span>
-                  <span className="mt-0.5 block text-[0.6875rem] leading-relaxed text-muted-foreground">
-                    {L(c.question)}
-                  </span>
                   <span className="mt-1 block text-[0.625rem] font-semibold uppercase tracking-wide text-muted-foreground">
                     {c.minutes} {t("minutes")}
                     {kids.length > 0 && ` · ${doneKids}/${collectIds(kids).length} ${t("subCount")}`}
