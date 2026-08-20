@@ -63,14 +63,16 @@ function Today() {
 
   return (
     <AppShell>
-      <div className="space-y-10 py-2">
-        <header className="space-y-5">
-          <p className="gk-eyebrow">{t("greeting")}</p>
-          <h1 className="max-w-xl text-3xl leading-[1.15] tracking-tight sm:text-[2.5rem]">
-            {t("todayQuestion")}
-          </h1>
+      <div className="space-y-12">
+        <header className="space-y-6">
+          <div>
+            <p className="gk-eyebrow">{t("greeting")}</p>
+            <h1 className="mt-2.5 max-w-2xl text-[1.75rem] leading-[1.2] tracking-tight sm:text-[2.125rem]">
+              {t("todayQuestion")}
+            </h1>
+          </div>
 
-          <div className="grid gap-4 rounded-2xl bg-surface p-4 sm:grid-cols-[minmax(0,1fr)_14rem] sm:items-center sm:p-5">
+          <div className="gk-panel grid gap-5 p-4 sm:grid-cols-[minmax(0,1fr)_15rem] sm:items-center sm:p-5">
             <div className="min-w-0">
               <p className="gk-eyebrow">{t("goalLabel")}</p>
               <div className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
