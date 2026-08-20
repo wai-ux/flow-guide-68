@@ -27,8 +27,7 @@ export const Route = createFileRoute("/")({
 
 function Today() {
   const { t } = useLang();
-  const L = useL();
-  const { state, hydrated, focusTopic, overallProgress } = useStore();
+  const { state, hydrated, overallProgress } = useStore();
 
   if (!hydrated) {
     return (
