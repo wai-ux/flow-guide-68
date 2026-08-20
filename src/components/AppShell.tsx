@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { useLang } from "@/lib/i18n";
 import { useTheme } from "@/lib/theme";
 import { useStore } from "@/lib/store";
+import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/primitives";
 import { cn } from "@/lib/utils";
 
@@ -56,7 +57,7 @@ function ThemeSwitch() {
 }
 
 const nav = [
-  { to: "/", key: "today" },
+  { to: "/dashboard", key: "today" },
   { to: "/plan", key: "plan" },
   { to: "/library", key: "library" },
 ] as const;
@@ -72,6 +73,7 @@ export function AppShell({
 }) {
   const { t } = useLang();
   const { reset } = useStore();
+  const { user, profile, signOut } = useAuth();
   const router = useRouter();
 
   return (
@@ -85,7 +87,7 @@ export function AppShell({
 
       <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl items-center gap-4 px-5 py-3">
-          <Link to="/" className="flex items-center gap-2.5">
+          <Link to="/dashboard" className="flex items-center gap-2.5">
             <span className="grid size-7 place-items-center rounded-md bg-primary text-primary-foreground">
               <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M4 20V8l8-4 8 4v12" />
@@ -102,7 +104,7 @@ export function AppShell({
                 to={n.to}
                 className="rounded-md px-2.5 py-1.5 text-[0.8125rem] font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                 activeProps={{ className: "bg-secondary text-foreground" }}
-                activeOptions={{ exact: n.to === "/" }}
+                
               >
                 {t(n.key)}
               </Link>
@@ -121,6 +123,26 @@ export function AppShell({
             </button>
             <LangSwitch />
             <ThemeSwitch />
+            {user && (
+              <div className="flex items-center gap-2 border-l border-border pl-2">
+                <span
+                  className="hidden max-w-32 truncate text-[0.75rem] text-muted-foreground md:block"
+                  title={user.email ?? undefined}
+                >
+                  {profile?.display_name ?? user.email}
+                </span>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={async () => {
+                    await signOut();
+                    await router.navigate({ to: "/auth", replace: true });
+                  }}
+                >
+                  {t("signOut")}
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       </header>
@@ -151,7 +173,7 @@ export function AppShell({
               to={n.to}
               className="flex-1 py-3 text-center text-[0.75rem] font-medium text-muted-foreground"
               activeProps={{ className: "text-primary" }}
-              activeOptions={{ exact: n.to === "/" }}
+              
             >
               {t(n.key)}
             </Link>

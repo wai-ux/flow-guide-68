@@ -10,7 +10,7 @@ import { useL, useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
 
-export const Route = createFileRoute("/topic/$id")({
+export const Route = createFileRoute("/_authenticated/topic/$id")({
   loader: ({ params }) => {
     const topic = findTopic(params.id);
     if (!topic) throw notFound();
@@ -80,7 +80,7 @@ function TopicPage() {
     const idx = all.findIndex((c) => c.id === active.id);
     const nxt = all.slice(idx + 1).find((c) => (state.concepts[c.id] ?? "todo") !== "understood");
     if (nxt) setActiveId(nxt.id);
-    else router.navigate({ to: "/" });
+    else router.navigate({ to: "/dashboard" });
   };
 
   return (

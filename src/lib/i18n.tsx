@@ -182,6 +182,51 @@ export const dict: Dict = {
   toReview: { en: "Needs review", mm: "ပြန်ကြည့်ရန်" },
   notStarted: { en: "Not started", mm: "မစသေးပါ" },
   subCount: { en: "sub-concepts", mm: "အခွဲ အကြောင်းအရာ" },
+  // auth
+  signIn: { en: "Sign in", mm: "အကောင့်ဝင်" },
+  signOut: { en: "Sign out", mm: "ထွက်" },
+  signInTitle: { en: "Welcome back", mm: "ပြန်လာတာ ကြိုဆိုပါတယ်" },
+  signUpTitle: { en: "Create your account", mm: "အကောင့် အသစ်ဖွင့်ပါ" },
+  authSub: {
+    en: "Your goal, sources and understanding progress are saved to your account.",
+    mm: "သင့်ရည်မှန်းချက်၊ အရင်းအမြစ်နှင့် နားလည်မှု တိုးတက်မှုကို အကောင့်တွင် သိမ်းထားပါမည်။",
+  },
+  createAccount: { en: "Create account", mm: "အကောင့် ဖွင့်" },
+  demoLogin: { en: "Continue with demo account", mm: "Demo အကောင့်နှင့် ဆက်လုပ်" },
+  googleLogin: { en: "Continue with Google", mm: "Google နှင့် ဆက်လုပ်" },
+  demoHint: {
+    en: "No typing needed — one tap signs you into a ready-made account.",
+    mm: "ရေးစရာမလိုပါ — တစ်ချက်နှိပ်ရုံနှင့် အသင့်အကောင့်ထဲ ဝင်ရောက်နိုင်ပါသည်။",
+  },
+  orEmail: { en: "or with email", mm: "သို့မဟုတ် အီးမေးလ်" },
+  nameLabel: { en: "Name", mm: "အမည်" },
+  namePlaceholder: { en: "Su Su", mm: "စုစု" },
+  emailLabel: { en: "Email", mm: "အီးမေးလ်" },
+  passwordLabel: { en: "Password", mm: "စကားဝှက်" },
+  authInvalid: {
+    en: "Enter a valid email and a password of at least 6 characters.",
+    mm: "မှန်ကန်သော အီးမေးလ်နှင့် အနည်းဆုံး ၆ လုံးရှိသော စကားဝှက် ထည့်ပါ။",
+  },
+  noAccount: { en: "New here?", mm: "အသစ်လာသူလား?" },
+  haveAccount: { en: "Already have an account?", mm: "အကောင့် ရှိပြီးသားလား?" },
+  account: { en: "Account", mm: "အကောင့်" },
+  getStarted: { en: "Get started", mm: "စတင်ပါ" },
+  stepPrioritise: {
+    en: "Add your goal and material — the gatekeeper prioritises it",
+    mm: "ရည်မှန်းချက်နှင့် အရင်းအမြစ် ထည့်ပါ — Gatekeeper က အစီအစဉ်ချပေးမည်",
+  },
+  stepBranch: {
+    en: "Follow a learning branch in dependency order",
+    mm: "အခြေခံမှ အစီအစဉ်တကျ သင်ယူမှု အကိုင်းအခက်ကို လိုက်ပါ",
+  },
+  stepCheck: {
+    en: "Explain it back — the understanding check finds the gap",
+    mm: "ပြန်ရှင်းပြပါ — နားလည်မှု စစ်ဆေးမှုက ချို့တဲ့ချက်ကို ရှာပေးမည်",
+  },
+  stepClose: {
+    en: "Close the gap, then continue with confidence",
+    mm: "ချို့တဲ့ချက်ကို ဖြေရှင်းပြီး စိတ်ချလက်ချ ဆက်လုပ်ပါ",
+  },
 };
 
 

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/primitives";
 import { useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/plan")({
+export const Route = createFileRoute("/_authenticated/plan")({
   head: () => ({
     meta: [
       { title: "Your prioritised learning plan — Gatekeeper" },
