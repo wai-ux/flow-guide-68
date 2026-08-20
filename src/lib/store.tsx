@@ -49,7 +49,7 @@ const KEY = "gk-state-v1";
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<AppState>(initial);
   const [hydrated, setHydrated] = useState(false);
-  const { user, loading: authLoading } = useAuth();
+  const { user, isDemo, loading: authLoading } = useAuth();
   const loadedFor = useRef<string | null>(null);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   // Load the signed-in member's saved state from their account (first time only).
   useEffect(() => {
-    if (authLoading || !hydrated || !user) return;
+    if (authLoading || !hydrated || !user || isDemo) return;
     if (loadedFor.current === user.id) return;
     loadedFor.current = user.id;
     let active = true;
@@ -93,7 +93,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return () => {
       active = false;
     };
-  }, [authLoading, hydrated, user?.id]);
+  }, [authLoading, hydrated, user?.id, isDemo]);
 
   useEffect(() => {
     if (!user) loadedFor.current = null;
@@ -105,7 +105,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   // Persist to the member's account (debounced).
   useEffect(() => {
-    if (!hydrated || !user || loadedFor.current !== user.id) return;
+    if (!hydrated || !user || isDemo || loadedFor.current !== user.id) return;
     const id = window.setTimeout(() => {
       void (async () => {
         const { error } = await supabase.from("learning_state").upsert(
@@ -125,7 +125,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       })();
     }, 600);
     return () => window.clearTimeout(id);
-  }, [state, hydrated, user?.id]);
+  }, [state, hydrated, user?.id, isDemo]);
 
   const update = useCallback((patch: Partial<AppState>) => setState((s) => ({ ...s, ...patch })), []);
 
