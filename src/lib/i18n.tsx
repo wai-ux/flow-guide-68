@@ -81,6 +81,9 @@ export const dict: Dict = {
   daysLeft: { en: "days left", mm: "ရက် ကျန်" },
   progress: { en: "Understanding", mm: "နားလည်မှု" },
   attention: { en: "Your attention today", mm: "ဒီနေ့ အာရုံစိုက်ရမည်" },
+  focusToday: { en: "Your focus today", mm: "ဒီနေ့ အာရုံစိုက်ရမည့်အရာ" },
+  everythingElse: { en: "Everything else", mm: "အခြားအရာများ" },
+
   // priority buckets
   urgent: { en: "Urgent", mm: "အရေးပေါ" },
   urgentWhy: { en: "Graded soon", mm: "မကြာမီ အမှတ်ပေးမည်" },
