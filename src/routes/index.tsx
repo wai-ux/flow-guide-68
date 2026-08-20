@@ -37,7 +37,7 @@ function Landing() {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border">
-        <div className="mx-auto flex max-w-5xl items-center gap-3 px-5 py-3">
+        <div className="mx-auto flex max-w-6xl items-center gap-3 px-5 py-3">
           <span className="grid size-7 place-items-center rounded-md bg-primary text-primary-foreground">
             <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M4 20V8l8-4 8 4v12" />
@@ -53,9 +53,9 @@ function Landing() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-5 py-16 sm:py-24">
+      <main className="mx-auto max-w-3xl px-5 py-20 sm:py-28">
         <Pill tone="primary">{t("appName")}</Pill>
-        <h1 className="mt-5 text-3xl leading-tight sm:text-4xl">{t("tagline")}</h1>
+        <h1 className="mt-5 max-w-2xl text-[2rem] leading-[1.15] sm:text-[2.5rem]">{t("tagline")}</h1>
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">{t("emptyPlanBody")}</p>
 
         <div className="mt-8 flex flex-wrap gap-2.5">
@@ -71,7 +71,7 @@ function Landing() {
 
         <ol className="mt-14 grid gap-3 sm:grid-cols-2">
           {steps.map((key, i) => (
-            <li key={key} className="rounded-lg border border-border bg-surface p-4">
+            <li key={key} className="gk-panel p-4">
               <span className="gk-eyebrow">
                 {t("step")} {i + 1}
               </span>
