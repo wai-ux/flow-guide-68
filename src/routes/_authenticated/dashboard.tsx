@@ -27,7 +27,7 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 
 function Today() {
   const { t } = useLang();
-  const { state, hydrated, overallProgress } = useStore();
+  const { state, hydrated, overallProgress, focusTopic } = useStore();
 
   if (!hydrated) {
     return (
