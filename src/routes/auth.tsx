@@ -151,7 +151,7 @@ function AuthPage() {
             )}
             {t("googleLogin")}
           </Button>
-          <p className="text-center text-[0.6875rem] text-muted-foreground">{t("demoHint")}</p>
+          
         </div>
 
         <div className="my-6 flex items-center gap-3">
