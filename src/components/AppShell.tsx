@@ -74,6 +74,7 @@ export function AppShell({
   const { t } = useLang();
   const { reset } = useStore();
   const { user, profile, signOut } = useAuth();
+  const { isPro } = useSubscription();
   const router = useRouter();
 
   return (
