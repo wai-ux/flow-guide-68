@@ -39,22 +39,22 @@ export function TopicCard({
       to="/topic/$id"
       params={{ id: topic.id }}
       className={cn(
-        "group block rounded-xl bg-card px-4 py-3.5 transition-colors hover:bg-secondary/60",
-        emphasis && "ring-1 ring-border-strong",
+        "group block rounded-lg bg-card px-4 py-3.5 shadow-card transition-colors hover:bg-secondary/70",
+        emphasis && "px-5 py-4",
       )}
     >
       <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-3">
         <h3
           className={cn(
             "min-w-0 font-semibold leading-snug tracking-tight",
-            emphasis ? "text-base sm:text-lg" : "text-[0.9375rem]",
+            emphasis ? "text-base sm:text-[1.0625rem]" : "text-[0.9375rem]",
           )}
         >
           {L(topic.title)}
         </h3>
         <svg
           viewBox="0 0 24 24"
-          className="mt-1 size-4 shrink-0 text-muted-foreground/60 transition-transform group-hover:translate-x-0.5 group-hover:text-foreground"
+          className="mt-1 size-4 shrink-0 text-muted-foreground/50 transition-transform group-hover:translate-x-0.5 group-hover:text-foreground"
           fill="none"
           stroke="currentColor"
           strokeWidth="2"
@@ -68,9 +68,9 @@ export function TopicCard({
         {L(topic.why)}
       </p>
 
-      <div className="mt-3 flex items-center gap-3">
+      <div className="mt-3.5 flex items-center gap-3">
         <Progress value={pct} className="h-1 flex-1" />
-        <span className="shrink-0 text-[0.6875rem] tabular-nums text-muted-foreground/80">
+        <span className="shrink-0 text-[0.6875rem] tabular-nums text-muted-foreground">
           {pct}% · {topic.minutes} {t("minutes")}
         </span>
       </div>
@@ -85,7 +85,7 @@ export function PriorityBoard() {
   const filtered = bucketTopics("filtered");
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="grid gap-4 lg:grid-cols-2">
         {bucketOrder.map((b) => {
           const list = bucketTopics(b);
@@ -96,8 +96,8 @@ export function PriorityBoard() {
               key={b}
               aria-labelledby={`bucket-${b}`}
               className={cn(
-                "rounded-2xl p-4 sm:p-5",
-                isUrgent ? "bg-urgent-soft/60 ring-1 ring-urgent/25" : "bg-surface",
+                "gk-panel p-4 sm:p-5",
+                isUrgent && "border-urgent/25 bg-urgent-soft/40",
               )}
             >
               <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3">
@@ -105,7 +105,7 @@ export function PriorityBoard() {
                   <h2
                     id={`bucket-${b}`}
                     className={cn(
-                      "flex items-center gap-2 text-[0.6875rem] font-semibold uppercase tracking-[0.08em]",
+                      "flex items-center gap-2 text-[0.6875rem] font-semibold uppercase tracking-[0.09em]",
                       isUrgent ? meta.text : "text-muted-foreground",
                     )}
                   >
@@ -114,7 +114,7 @@ export function PriorityBoard() {
                   </h2>
                   <p className="mt-1.5 truncate text-[0.75rem] text-muted-foreground">{t(meta.why)}</p>
                 </div>
-                <span className="shrink-0 text-[0.6875rem] tabular-nums text-muted-foreground/80">
+                <span className="shrink-0 text-[0.6875rem] tabular-nums text-muted-foreground">
                   {list.length} {t("topics")}
                 </span>
               </div>
@@ -130,7 +130,7 @@ export function PriorityBoard() {
       </div>
 
       {filtered.length > 0 && (
-        <section aria-labelledby="bucket-filtered" className="rounded-2xl px-1 pt-1">
+        <section aria-labelledby="bucket-filtered">
           <h2 id="bucket-filtered" className="gk-eyebrow">
             {t("filteredOut")}
           </h2>
@@ -139,7 +139,7 @@ export function PriorityBoard() {
             {filtered.map((tp) => (
               <li
                 key={tp.id}
-                className="flex flex-wrap items-baseline gap-x-2 text-[0.8125rem] text-muted-foreground/80"
+                className="flex flex-wrap items-baseline gap-x-2 text-[0.8125rem] text-muted-foreground"
               >
                 <span className="line-through decoration-border-strong">{L(tp.title)}</span>
                 <span className="text-[0.75rem] opacity-70">— {L(tp.why)}</span>
