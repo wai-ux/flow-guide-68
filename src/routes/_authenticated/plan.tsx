@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { PriorityBoard } from "@/components/PriorityBoard";
-import { Button } from "@/components/ui/primitives";
+import { Button, PageHeader } from "@/components/ui/primitives";
 import { useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
