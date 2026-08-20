@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useState, t
 import { useAuth } from "./auth";
 
 export const PRO_PRICE_USD = 10;
+export const ASSESSMENT_PRICE_USD = 2;
 
 export type PlanTier = "free" | "pro";
 
@@ -10,17 +11,29 @@ export type Subscription = {
   startedAt: string | null;
   renewsAt: string | null;
   cancelAtPeriodEnd: boolean;
+  assessmentCredits: number;
+  assessmentPurchasedAt: string | null;
 };
 
-const emptySub: Subscription = { tier: "free", startedAt: null, renewsAt: null, cancelAtPeriodEnd: false };
+const emptySub: Subscription = {
+  tier: "free",
+  startedAt: null,
+  renewsAt: null,
+  cancelAtPeriodEnd: false,
+  assessmentCredits: 0,
+  assessmentPurchasedAt: null,
+};
 
 type Ctx = {
   sub: Subscription;
   isPro: boolean;
+  hasAssessment: boolean;
   subscribe: () => void;
+  buyAssessment: () => void;
   cancel: () => void;
   resume: () => void;
 };
+
 
 const SubContext = createContext<Ctx | null>(null);
 
