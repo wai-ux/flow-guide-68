@@ -72,8 +72,8 @@ function LibraryPage() {
           type="search"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder={`${t("library")}…`}
-          aria-label={t("library")}
+          placeholder={t("searchSources")}
+          aria-label={t("searchSources")}
           className="sm:max-w-xs"
         />
         <div className="flex flex-wrap gap-1.5" role="group" aria-label={t("sources")}>
@@ -89,11 +89,13 @@ function LibraryPage() {
                   : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground",
               )}
             >
-              {k === "all" ? t("topics") : t(kindLabel[k])}
+              {k === "all" ? t("allKinds") : t(kindLabel[k])}
             </button>
           ))}
         </div>
-        <span className="gk-meta sm:ml-auto">{visible.length}</span>
+        <span className="gk-meta sm:ml-auto">
+          {visible.length} {t("itemsCount")}
+        </span>
       </div>
 
       <div className="mt-5 space-y-2">
@@ -101,13 +103,13 @@ function LibraryPage() {
           <SourceRow key={s.id} source={s} />
         ))}
         {visible.length === 0 && (
-          <p className="py-10 text-center text-sm text-muted-foreground">{t("sourcesHelp")}</p>
+          <p className="py-10 text-center text-sm text-muted-foreground">{t("noMatches")}</p>
         )}
       </div>
 
       {state.resources.length > 0 && (
         <section className="mt-10">
-          <h2 className="gk-eyebrow">{t("resourcesTitle")}</h2>
+          <h2 className="gk-eyebrow">{t("yourUploads")}</h2>
           <ul className="mt-3 divide-y divide-border">
             {state.resources.map((r) => (
               <li key={r.id} className="flex items-center gap-3 py-3 text-sm">
