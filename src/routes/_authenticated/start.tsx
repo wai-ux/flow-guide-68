@@ -5,7 +5,7 @@ import { Button, Card, Input, Progress, Spinner, Textarea } from "@/components/u
 import { useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/start")({
+export const Route = createFileRoute("/_authenticated/start")({
   head: () => ({
     meta: [
       { title: "Set your learning goal — Gatekeeper" },

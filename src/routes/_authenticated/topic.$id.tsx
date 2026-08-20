@@ -10,7 +10,7 @@ import { useL, useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
 
-export const Route = createFileRoute("/topic/$id")({
+export const Route = createFileRoute("/_authenticated/topic/$id")({
   loader: ({ params }) => {
     const topic = findTopic(params.id);
     if (!topic) throw notFound();

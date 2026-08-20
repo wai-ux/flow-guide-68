@@ -10,73 +10,79 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as LibraryRouteImport } from './routes/library'
-import { Route as PlanRouteImport } from './routes/plan'
-import { Route as StartRouteImport } from './routes/start'
-import { Route as TopicIdRouteImport } from './routes/topic.$id'
+import { Route as AuthenticatedLibraryRouteImport } from './routes/_authenticated/library'
+import { Route as AuthenticatedPlanRouteImport } from './routes/_authenticated/plan'
+import { Route as AuthenticatedStartRouteImport } from './routes/_authenticated/start'
+import { Route as AuthenticatedTopicIdRouteImport } from './routes/_authenticated/topic.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LibraryRoute = LibraryRouteImport.update({
-  id: '/library',
+const AuthenticatedLibraryRoute = AuthenticatedLibraryRouteImport.update({
+  id: '/_authenticated/library',
   path: '/library',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PlanRoute = PlanRouteImport.update({
-  id: '/plan',
+const AuthenticatedPlanRoute = AuthenticatedPlanRouteImport.update({
+  id: '/_authenticated/plan',
   path: '/plan',
   getParentRoute: () => rootRouteImport,
 } as any)
-const StartRoute = StartRouteImport.update({
-  id: '/start',
+const AuthenticatedStartRoute = AuthenticatedStartRouteImport.update({
+  id: '/_authenticated/start',
   path: '/start',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TopicIdRoute = TopicIdRouteImport.update({
-  id: '/topic/$id',
+const AuthenticatedTopicIdRoute = AuthenticatedTopicIdRouteImport.update({
+  id: '/_authenticated/topic/$id',
   path: '/topic/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/library': typeof LibraryRoute
-  '/plan': typeof PlanRoute
-  '/start': typeof StartRoute
-  '/topic/$id': typeof TopicIdRoute
+  '/library': typeof AuthenticatedLibraryRoute
+  '/plan': typeof AuthenticatedPlanRoute
+  '/start': typeof AuthenticatedStartRoute
+  '/topic/$id': typeof AuthenticatedTopicIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/library': typeof LibraryRoute
-  '/plan': typeof PlanRoute
-  '/start': typeof StartRoute
-  '/topic/$id': typeof TopicIdRoute
+  '/library': typeof AuthenticatedLibraryRoute
+  '/plan': typeof AuthenticatedPlanRoute
+  '/start': typeof AuthenticatedStartRoute
+  '/topic/$id': typeof AuthenticatedTopicIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/library': typeof LibraryRoute
-  '/plan': typeof PlanRoute
-  '/start': typeof StartRoute
-  '/topic/$id': typeof TopicIdRoute
+  '/_authenticated/library': typeof AuthenticatedLibraryRoute
+  '/_authenticated/plan': typeof AuthenticatedPlanRoute
+  '/_authenticated/start': typeof AuthenticatedStartRoute
+  '/_authenticated/topic/$id': typeof AuthenticatedTopicIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths: '/' | '/library' | '/plan' | '/start' | '/topic/$id'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/library' | '/plan' | '/start' | '/topic/$id'
-  id: '__root__' | '/' | '/library' | '/plan' | '/start' | '/topic/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated/library'
+    | '/_authenticated/plan'
+    | '/_authenticated/start'
+    | '/_authenticated/topic/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LibraryRoute: typeof LibraryRoute
-  PlanRoute: typeof PlanRoute
-  StartRoute: typeof StartRoute
-  TopicIdRoute: typeof TopicIdRoute
+  AuthenticatedLibraryRoute: typeof AuthenticatedLibraryRoute
+  AuthenticatedPlanRoute: typeof AuthenticatedPlanRoute
+  AuthenticatedStartRoute: typeof AuthenticatedStartRoute
+  AuthenticatedTopicIdRoute: typeof AuthenticatedTopicIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -88,32 +94,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/library': {
-      id: '/library'
+    '/_authenticated/library': {
+      id: '/_authenticated/library'
       path: '/library'
       fullPath: '/library'
-      preLoaderRoute: typeof LibraryRouteImport
+      preLoaderRoute: typeof AuthenticatedLibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/plan': {
-      id: '/plan'
+    '/_authenticated/plan': {
+      id: '/_authenticated/plan'
       path: '/plan'
       fullPath: '/plan'
-      preLoaderRoute: typeof PlanRouteImport
+      preLoaderRoute: typeof AuthenticatedPlanRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/start': {
-      id: '/start'
+    '/_authenticated/start': {
+      id: '/_authenticated/start'
       path: '/start'
       fullPath: '/start'
-      preLoaderRoute: typeof StartRouteImport
+      preLoaderRoute: typeof AuthenticatedStartRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/topic/$id': {
-      id: '/topic/$id'
+    '/_authenticated/topic/$id': {
+      id: '/_authenticated/topic/$id'
       path: '/topic/$id'
       fullPath: '/topic/$id'
-      preLoaderRoute: typeof TopicIdRouteImport
+      preLoaderRoute: typeof AuthenticatedTopicIdRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -121,10 +127,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LibraryRoute: LibraryRoute,
-  PlanRoute: PlanRoute,
-  StartRoute: StartRoute,
-  TopicIdRoute: TopicIdRoute,
+  AuthenticatedLibraryRoute: AuthenticatedLibraryRoute,
+  AuthenticatedPlanRoute: AuthenticatedPlanRoute,
+  AuthenticatedStartRoute: AuthenticatedStartRoute,
+  AuthenticatedTopicIdRoute: AuthenticatedTopicIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

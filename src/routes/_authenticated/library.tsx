@@ -6,7 +6,7 @@ import { sources } from "@/lib/content";
 import { useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/library")({
+export const Route = createFileRoute("/_authenticated/library")({
   head: () => ({
     meta: [
       { title: "Your material library — Gatekeeper" },
