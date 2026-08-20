@@ -137,8 +137,65 @@ const backprop: Concept = {
       expects: { en: "Product of local derivatives along the path.", mm: "လမ်းကြောင်းတစ်လျှောက် local derivative များ၏ မြှောက်လဒ်။" },
       gap: { en: "The path from weight to loss is still missing.", mm: "Weight မှ loss သို့ လမ်းကြောင်း မပါသေးပါ။" },
       gapFix: { en: "Trace one path end to end", mm: "လမ်းကြောင်းတစ်ခုကို အစမှအဆုံး ဆွဲကြည့်ပါ" },
+      children: [
+        {
+          id: "c-local-deriv",
+          title: { en: "Local derivatives at one node", mm: "Node တစ်ခု၏ local derivative" },
+          question: { en: "What does one node contribute?", mm: "Node တစ်ခု ဘာပါဝင်မှု ပေးလဲ?" },
+          summary: {
+            en: "Every node only needs to know its own slope; backprop stitches those slopes together.",
+            mm: "Node တစ်ခုစီ သူ့ slope ကိုသာ သိရသည်။ Backprop က ထို slope များကို ချိတ်ဆက်ပေးသည်။",
+          },
+          minutes: 8,
+          sourceIds: ["s6"],
+          prompt: {
+            en: "Why is it enough for a node to know only its own derivative?",
+            mm: "Node တစ်ခုက သူ့ derivative ကိုသာ သိရင် ဘာလို့ လုံလောက်လဲ?",
+          },
+          expects: { en: "Because the incoming gradient carries everything downstream.", mm: "အဝင် gradient သည် အောက်ပိုင်းအားလုံးကို သယ်လာသဖြင့်။" },
+          gap: { en: "The incoming gradient's role isn't explained.", mm: "အဝင် gradient ၏ အခန်းကနေ မရှင်းပြရသေးပါ။" },
+          gapFix: { en: "Follow one gradient into a node", mm: "Gradient တစ်ခု node အထဲ ဝင်သွားပုံ ကြည့်ပါ" },
+        },
+        {
+          id: "c-two-paths",
+          title: { en: "When two paths meet", mm: "လမ်းကြောင်း နှစ်ခု ဆုံသည့်အခါ" },
+          question: { en: "Why do gradients add?", mm: "Gradient များ ဘာလို့ ပေါင်းလဲ?" },
+          summary: {
+            en: "If a weight influences the loss through two routes, its total effect is the sum of both routes.",
+            mm: "Weight တစ်ခုက loss ကို လမ်းကြောင်း နှစ်ခုမှ ထိခိုက်လျှင် စုစုပေါင်း အကျိုးသက်ရောက်မှုသည် နှစ်ခု၏ ပေါင်းလဒ် ဖြစ်သည်။",
+          },
+          minutes: 10,
+          sourceIds: ["s6", "s5"],
+          prompt: {
+            en: "A hidden unit feeds two outputs. How is its gradient formed?",
+            mm: "Hidden unit တစ်ခု အထွက် နှစ်ခုကို ပေးနေလျှင် သူ့ gradient ဘယ်လို ဖြစ်လာလဲ?",
+          },
+          expects: { en: "Sum the contributions from both output paths.", mm: "အထွက် လမ်းကြောင်း နှစ်ခု၏ ပါဝင်မှုကို ပေါင်းရမည်။" },
+          gap: { en: "You picked one path and stopped.", mm: "လမ်းကြောင်းတစ်ခုသာ ရွေးပြီး ရပ်လိုက်ပါသည်။" },
+          gapFix: { en: "Add both routes, then compare", mm: "လမ်းကြောင်း နှစ်ခု ပေါင်းပြီး နှိုင်းယှဉ်ပါ" },
+        },
+      ],
+    },
+    {
+      id: "c-credit",
+      title: { en: "Credit assignment", mm: "ပါဝင်မှု ခွဲခြားခြင်း" },
+      question: { en: "Which weight caused the error?", mm: "ဘယ် weight က အမှားကို ဖြစ်စေလဲ?" },
+      summary: {
+        en: "Backprop answers 'how much is this weight to blame?' — that number is the update.",
+        mm: "Backprop က 'ဒီ weight ဘယ်လောက် တာဝန်ရှိလဲ' ကို ဖြေပေးသည်။ ထိုကိန်းသည် update ဖြစ်သည်။",
+      },
+      minutes: 14,
+      sourceIds: ["s5", "s1"],
+      prompt: {
+        en: "Two weights get different updates from the same error. Why?",
+        mm: "အမှားတူတူမှ weight နှစ်ခု update မတူတာ ဘာလို့လဲ?",
+      },
+      expects: { en: "Their sensitivity to the loss differs along their own paths.", mm: "သူတို့၏ လမ်းကြောင်းအလိုက် loss အပေါ် အထိခိုက်လွယ်မှု မတူသဖြင့်။" },
+      gap: { en: "You treated the error as if it were shared equally.", mm: "အမှားကို အညီအမျှ မျှဝေထားသလို ယူဆထားပါသည်။" },
+      gapFix: { en: "Compare two weights on one example", mm: "ဥပမာတစ်ခုတွင် weight နှစ်ခု နှိုင်းယှဉ်ပါ" },
     },
   ],
+
 };
 
 export const topics: Topic[] = [
@@ -199,6 +256,27 @@ export const topics: Topic[] = [
         expects: { en: "Vanishing gradients in early layers.", mm: "အစပိုင်း layer များတွင် gradient ပျောက်ကွယ်ခြင်း။" },
         gap: { en: "Saturation is named, its effect on early layers isn't.", mm: "ပြည့်သွားခြင်းကို ဖော်ပြသော်လည် အစပိုင်း layer အပေါ် အကျိုးသက်ရောက်မှု မပါပါ။" },
         gapFix: { en: "Vanishing gradient, one layer at a time", mm: "Gradient ပျောက်ကွယ်မှု — layer တစ်ခုချင်း" },
+        children: [
+          {
+            id: "c-dead-relu",
+            title: { en: "Dying ReLU", mm: "ReLU သေခြင်း" },
+            question: { en: "When does ReLU stop learning?", mm: "ReLU က ဘယ်အခါ သင်ယူရပ် သွားလဲ?" },
+            summary: {
+              en: "A unit stuck on the negative side outputs zero forever, so no gradient reaches it.",
+              mm: "အနုတ်ဘက်မှာ ကျန်နေသော unit သည် သုညသာ ထုတ်သဖြင့် gradient မရောက်တော့ပါ။",
+            },
+            minutes: 9,
+            sourceIds: ["s3"],
+            prompt: {
+              en: "Why can a ReLU unit become permanently inactive?",
+              mm: "ReLU unit တစ်ခု အမြဲတမ် မလုပ်ဆောင်တော့တာ ဘာလို့ ဖြစ်နိုင်လဲ?",
+            },
+            expects: { en: "Zero gradient in the negative region freezes its weights.", mm: "အနုတ်နယ်ပယ်တွင် gradient သုည ဖြစ်၍ weight များ ရပ်တန့်သည်။" },
+            gap: { en: "You named the symptom, not the zero-gradient cause.", mm: "လက္ခဏာကိုသာ ဖော်ပြပြီး gradient သုည အကြောင်းရင်း မပါပါ။" },
+            gapFix: { en: "Plot the ReLU slope on both sides", mm: "ReLU slope ကို နှစ်ဘက် ဆွဲကြည့်ပါ" },
+          },
+        ],
+
       },
     ],
   },
@@ -229,6 +307,27 @@ export const topics: Topic[] = [
         expects: { en: "Accuracy is a step function — no usable gradient.", mm: "Accuracy သည် step function ဖြစ်၍ gradient မရပါ။" },
         gap: { en: "Missing why accuracy gives no gradient.", mm: "Accuracy က gradient မပေးတာ ဘာလို့လဲ မပါပါ။" },
         gapFix: { en: "Smooth vs step objectives", mm: "Smooth နှင့် step ရည်မှန်းချက် နှိုင်းယှဉ်" },
+        children: [
+          {
+            id: "c-gd",
+            title: { en: "Gradient descent step", mm: "Gradient descent တစ်ဆင့်" },
+            question: { en: "How big should one step be?", mm: "တစ်ဆင့် ဘယ်လောက် ကြီးသင့်လဲ?" },
+            summary: {
+              en: "The gradient gives a direction; the learning rate decides how far to trust it.",
+              mm: "Gradient က လမ်းကြောင်းပေးသည်။ Learning rate က ဘယ်လောက် ယုံရမည်ကို ဆုံးဖြတ်သည်။",
+            },
+            minutes: 12,
+            sourceIds: ["s7"],
+            prompt: {
+              en: "What happens with a learning rate that is far too large?",
+              mm: "Learning rate အလွန်ကြီးလျှင် ဘာဖြစ်လဲ?",
+            },
+            expects: { en: "Overshooting the minimum, loss diverges instead of settling.", mm: "အနိမ့်ဆုံးကို ခုန်ကျော်ပြီး loss တည်မငြိမ်ဘဲ တက်သွားသည်။" },
+            gap: { en: "Direction covered, step size effect missing.", mm: "လမ်းကြောင်း ပါသော်လည် ခြေလှမ်းအရွယ် အကျိုးသက်ရောက်မှု မပါပါ။" },
+            gapFix: { en: "Same slope, two step sizes", mm: "Slope တူတူ၊ ခြေလှမ်း နှစ်မျိုး" },
+          },
+        ],
+
       },
     ],
   },
@@ -283,4 +382,29 @@ export function flatConcepts(topic: Topic): Concept[] {
   const walk = (cs: Concept[]) => cs.forEach((c) => { out.push(c); if (c.children) walk(c.children); });
   walk(topic.concepts);
   return out;
+}
+
+/** Ancestor chain (root → concept) for a concept id, empty when not found. */
+export function conceptPath(topic: Topic, id: string): Concept[] {
+  const walk = (cs: Concept[], trail: Concept[]): Concept[] | null => {
+    for (const c of cs) {
+      const next = [...trail, c];
+      if (c.id === id) return next;
+      if (c.children) {
+        const found = walk(c.children, next);
+        if (found) return found;
+      }
+    }
+    return null;
+  };
+  return walk(topic.concepts, []) ?? [];
+}
+
+export function conceptDepth(topic: Topic, id: string) {
+  return Math.max(0, conceptPath(topic, id).length - 1);
+}
+
+export function subConcepts(topic: Topic, id: string): Concept[] {
+  const path = conceptPath(topic, id);
+  return path[path.length - 1]?.children ?? [];
 }

@@ -136,7 +136,32 @@ export const dict: Dict = {
   lightMode: { en: "Light", mm: "အလင်း" },
   darkMode: { en: "Dark", mm: "အမည်း" },
   langLabel: { en: "Language", mm: "ဘာသာစကား" },
+  // learning branch session
+  session: { en: "Session", mm: "သင်ခန်းစာ" },
+  stepOf: { en: "Step", mm: "အဆင့်" },
+  goDeeper: { en: "Go deeper", mm: "ပိုအနက် ဆက်ကြည့်" },
+  deeperBranches: { en: "Deeper branches", mm: "အနက်ပိုသော အကိုင်းအခက်" },
+  deeperHelp: {
+    en: "Unlocked once you understand this concept.",
+    mm: "ဒီအကြောင်းအရာ နားလည်ပြီးမှ ဖွင့်ပေးမည်။",
+  },
+  prevConcept: { en: "Previous", mm: "အရင်တစ်ခု" },
+  nextConcept: { en: "Next", mm: "နောက်တစ်ခု" },
+  levelLabel: { en: "Level", mm: "အဆင့်" },
+  expandAll: { en: "Expand all", mm: "အားလုံး ဖွင့်" },
+  collapseAll: { en: "Collapse all", mm: "အားလုံး ပိတ်" },
+  branchDone: { en: "Branch complete", mm: "အကိုင်းအခက် ပြီးပါသည်" },
+  branchDoneBody: {
+    en: "Every concept in this branch is understood. Back to the plan for the next priority.",
+    mm: "ဒီအကိုင်းအခက်ရဲ့ အကြောင်းအရာ အားလုံး နားလည်ပြီးပါသည်။ နောက်ထပ် ဦးစားပေးအတွက် အစီအစဉ်ဆီ ပြန်သွားပါ။",
+  },
+  remaining: { en: "left", mm: "ကျန်" },
+  understood: { en: "Understood", mm: "နားလည်ပြီး" },
+  toReview: { en: "Needs review", mm: "ပြန်ကြည့်ရန်" },
+  notStarted: { en: "Not started", mm: "မစသေးပါ" },
+  subCount: { en: "sub-concepts", mm: "အခွဲ အကြောင်းအရာ" },
 };
+
 
 type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (k: keyof typeof dict) => string };
 
