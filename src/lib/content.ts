@@ -256,6 +256,27 @@ export const topics: Topic[] = [
         expects: { en: "Vanishing gradients in early layers.", mm: "အစပိုင်း layer များတွင် gradient ပျောက်ကွယ်ခြင်း။" },
         gap: { en: "Saturation is named, its effect on early layers isn't.", mm: "ပြည့်သွားခြင်းကို ဖော်ပြသော်လည် အစပိုင်း layer အပေါ် အကျိုးသက်ရောက်မှု မပါပါ။" },
         gapFix: { en: "Vanishing gradient, one layer at a time", mm: "Gradient ပျောက်ကွယ်မှု — layer တစ်ခုချင်း" },
+        children: [
+          {
+            id: "c-dead-relu",
+            title: { en: "Dying ReLU", mm: "ReLU သေခြင်း" },
+            question: { en: "When does ReLU stop learning?", mm: "ReLU က ဘယ်အခါ သင်ယူရပ် သွားလဲ?" },
+            summary: {
+              en: "A unit stuck on the negative side outputs zero forever, so no gradient reaches it.",
+              mm: "အနုတ်ဘက်မှာ ကျန်နေသော unit သည် သုညသာ ထုတ်သဖြင့် gradient မရောက်တော့ပါ။",
+            },
+            minutes: 9,
+            sourceIds: ["s3"],
+            prompt: {
+              en: "Why can a ReLU unit become permanently inactive?",
+              mm: "ReLU unit တစ်ခု အမြဲတမ် မလုပ်ဆောင်တော့တာ ဘာလို့ ဖြစ်နိုင်လဲ?",
+            },
+            expects: { en: "Zero gradient in the negative region freezes its weights.", mm: "အနုတ်နယ်ပယ်တွင် gradient သုည ဖြစ်၍ weight များ ရပ်တန့်သည်။" },
+            gap: { en: "You named the symptom, not the zero-gradient cause.", mm: "လက္ခဏာကိုသာ ဖော်ပြပြီး gradient သုည အကြောင်းရင်း မပါပါ။" },
+            gapFix: { en: "Plot the ReLU slope on both sides", mm: "ReLU slope ကို နှစ်ဘက် ဆွဲကြည့်ပါ" },
+          },
+        ],
+
       },
     ],
   },
