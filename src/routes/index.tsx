@@ -35,8 +35,8 @@ function Today() {
       <AppShell>
         <div className="space-y-4 py-6" aria-busy="true" aria-label={t("loading")}>
           <div className="h-6 w-40 animate-pulse rounded bg-secondary" />
-          <div className="h-40 animate-pulse rounded-2xl bg-secondary" />
-          <div className="h-24 animate-pulse rounded-2xl bg-secondary" />
+          <div className="h-40 animate-pulse rounded-lg bg-secondary" />
+          <div className="h-24 animate-pulse rounded-lg bg-secondary" />
         </div>
       </AppShell>
     );

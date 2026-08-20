@@ -71,7 +71,7 @@ export function UnderstandingCheck({
         role="dialog"
         aria-modal="true"
         aria-labelledby="check-title"
-        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-2xl border border-border bg-card p-6 shadow-lift sm:rounded-2xl"
+        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-xl border border-border bg-card p-6 sm:rounded-xl"
       >
         <div className="flex items-start justify-between gap-3">
           <div>
