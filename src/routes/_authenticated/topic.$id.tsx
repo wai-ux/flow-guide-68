@@ -183,14 +183,17 @@ function TopicPage() {
               </div>
             )}
 
-            <div className="mt-5 flex flex-wrap items-center gap-2">
-              <Button
-                variant={status === "todo" ? "outline" : "quiet"}
-                onClick={() => setConcept(active.id, status === "todo" ? "studied" : "todo")}
-              >
-                {status === "todo" ? t("markRead") : `✓ ${t("studied")}`}
-              </Button>
-              <Button onClick={() => setChecking(true)}>{t("check")}</Button>
+            <div className="mt-5 gk-rule pt-5">
+              <p className="gk-eyebrow">2 · {t("check")}</p>
+              <div className="mt-3 flex flex-wrap items-center gap-2">
+                <Button
+                  variant={status === "todo" ? "outline" : "quiet"}
+                  onClick={() => setConcept(active.id, status === "todo" ? "studied" : "todo")}
+                >
+                  {status === "todo" ? t("markRead") : `✓ ${t("studied")}`}
+                </Button>
+                <Button onClick={() => setChecking(true)}>{t("check")}</Button>
+              </div>
             </div>
 
             <div className="mt-4 flex items-center justify-between gap-2 gk-rule pt-4">
