@@ -1,7 +1,7 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AppShell } from "@/components/AppShell";
-import { Button, Card, Input, Progress, Spinner, Textarea } from "@/components/ui/primitives";
+import { Button, Input, Progress, Spinner, Textarea } from "@/components/ui/primitives";
 import { useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
