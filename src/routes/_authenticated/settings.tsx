@@ -61,27 +61,24 @@ function SettingsPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-4xl">
-        <PageHeader eyebrow={t("appName")} title={t("settings")} description={t("settingsSub")} className="mb-6" />
+        <PageHeader title={t("settings")} className="mb-6" />
 
-        <Card className="p-5">
-          <h2 className="text-sm font-semibold">{t("account")}</h2>
-          <dl className="mt-3 space-y-2 text-sm">
-            <div className="flex justify-between gap-4">
-              <dt className="text-muted-foreground">{t("nameLabel")}</dt>
-              <dd className="truncate">{profile?.display_name ?? "—"}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-muted-foreground">{t("emailLabel")}</dt>
-              <dd className="truncate">{user?.email ?? "—"}</dd>
-            </div>
-          </dl>
-        </Card>
+        <dl className="space-y-2 text-sm">
+          <div className="flex justify-between gap-4">
+            <dt className="text-muted-foreground">{t("nameLabel")}</dt>
+            <dd className="truncate">{profile?.display_name ?? "—"}</dd>
+          </div>
+          <div className="flex justify-between gap-4">
+            <dt className="text-muted-foreground">{t("emailLabel")}</dt>
+            <dd className="truncate">{user?.email ?? "—"}</dd>
+          </div>
+        </dl>
 
-        <section className="mt-6">
+        <section className="mt-10">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
-            <h2 className="text-sm font-semibold">{t("subscription")}</h2>
+            <h2 className="gk-eyebrow">{t("subscription")}</h2>
             <span className="text-[0.75rem] text-muted-foreground">
-              {isPro ? t("planPro") : t("planFree")} · {t("currentPlan")}
+              {isPro ? t("planPro") : t("planFree")}
             </span>
           </div>
 
