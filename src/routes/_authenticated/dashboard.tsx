@@ -4,6 +4,8 @@ import { PriorityBoard, TopicCard } from "@/components/PriorityBoard";
 import { Button, Pill, Progress } from "@/components/ui/primitives";
 import { useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
+import { useAuth } from "@/lib/auth";
+import { useProgress } from "@/lib/progress";
 
 export const Route = createFileRoute("/_authenticated/dashboard")({
   head: () => ({
@@ -27,6 +29,9 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 function Today() {
   const { t } = useLang();
   const { state, hydrated, overallProgress, focusTopic } = useStore();
+  const { user, profile } = useAuth();
+  const { completed, inProgress, synced } = useProgress();
+  const studentName = profile?.display_name ?? user?.email?.split("@")[0] ?? "";
 
   if (!hydrated) {
     return (
@@ -63,6 +68,22 @@ function Today() {
       <div className="space-y-10">
         <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
           <div className="min-w-0">
+            <div className="mb-3 flex items-center gap-2.5">
+              {profile?.avatar_url ? (
+                <img
+                  src={profile.avatar_url}
+                  alt={studentName}
+                  className="size-8 shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-secondary text-[0.75rem] font-bold uppercase text-foreground">
+                  {(studentName || "?").charAt(0)}
+                </span>
+              )}
+              <span className="truncate text-[0.8125rem] text-muted-foreground">
+                {t("welcomeBack")}, <span className="font-semibold text-foreground">{studentName}</span>
+              </span>
+            </div>
             <h1 className="max-w-2xl text-[1.75rem] leading-[1.2] tracking-tight sm:text-[2.125rem]">
               {t("todayQuestion")}
             </h1>
@@ -70,6 +91,20 @@ function Today() {
               {state.goal} · {overallProgress}% {t("progress")}
             </p>
             <Progress value={overallProgress} className="mt-3 h-1 max-w-xs" />
+            <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[0.75rem] text-muted-foreground">
+              <span>
+                <span className="font-semibold text-foreground">{completed}</span> {t("topicsDone")}
+              </span>
+              <span>
+                <span className="font-semibold text-foreground">{inProgress}</span> {t("topicsActive")}
+              </span>
+              {synced && (
+                <span className="flex items-center gap-1.5">
+                  <span className="size-1.5 rounded-full bg-primary" aria-hidden />
+                  {t("liveSynced")}
+                </span>
+              )}
+            </div>
           </div>
           <Link to="/start" className="shrink-0">
             <Button size="lg" className="w-full sm:w-auto">

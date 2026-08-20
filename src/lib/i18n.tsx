@@ -65,6 +65,10 @@ export const dict: Dict = {
     mm: "မလိုအပ်တာ ဖယ်၊ အခြေခံ ဆက်နွယ်မှု ရှာ၊ အရေးပေါအလိုက် အစီအစဉ်ချနေသည်။",
   },
   // dashboard
+  welcomeBack: { en: "Welcome back", mm: "ပြန်လာတာ ကြိုဆိုပါတယ်" },
+  topicsDone: { en: "Topics mastered", mm: "ကျွမ်းကျင်ပြီး" },
+  topicsActive: { en: "In progress", mm: "လုပ်နေဆဲ" },
+  liveSynced: { en: "Synced to your account", mm: "အကောင့်နှင့် သိမ်းဆည်းပြီး" },
   greeting: { en: "Good morning, Su", mm: "မင်္ဂလာနံနက်ခင်းပါ စု" },
   todayQuestion: { en: "What should I do today?", mm: "ဒီနေ့ ဘာလုပ်ရမလဲ?" },
   todayAnswer: { en: "Start here", mm: "ဒီကနေ စပါ" },
