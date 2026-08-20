@@ -76,15 +76,24 @@ export function SubscriptionProvider({ children }: { children: ReactNode }) {
     return {
       sub,
       isPro: sub.tier === "pro",
+      hasAssessment: sub.tier === "pro" || sub.assessmentCredits > 0,
       subscribe: () =>
         persist({
+          ...sub,
           tier: "pro",
           startedAt: now.toISOString(),
           renewsAt: addMonth(now).toISOString(),
           cancelAtPeriodEnd: false,
         }),
+      buyAssessment: () =>
+        persist({
+          ...sub,
+          assessmentCredits: sub.assessmentCredits + 1,
+          assessmentPurchasedAt: now.toISOString(),
+        }),
       cancel: () => persist({ ...sub, cancelAtPeriodEnd: true }),
       resume: () => persist({ ...sub, cancelAtPeriodEnd: false }),
+
     };
   }, [sub, persist]);
 
