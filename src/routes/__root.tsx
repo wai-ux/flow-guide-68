@@ -15,6 +15,7 @@ import { ThemeProvider } from "@/lib/theme";
 import { LanguageProvider } from "@/lib/i18n";
 import { StoreProvider } from "@/lib/store";
 import { AuthProvider } from "@/lib/auth";
+import { SubscriptionProvider } from "@/lib/subscription";
 
 function NotFoundComponent() {
   return (
