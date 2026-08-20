@@ -6,8 +6,6 @@ import { lovable } from "@/integrations/lovable/index";
 import { Button, Input, Spinner } from "@/components/ui/primitives";
 import { useAuth } from "@/lib/auth";
 import { useLang } from "@/lib/i18n";
-import { DEMO_EMAIL, DEMO_PASSWORD } from "@/lib/demo-account";
-import { ensureDemoAccount } from "@/lib/demo.functions";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/auth")({
@@ -38,7 +36,7 @@ type Mode = "signin" | "signup";
 function AuthPage() {
   const { t } = useLang();
   const router = useRouter();
-  const { session, loading } = useAuth();
+  const { session, loading, startDemo } = useAuth();
 
   const [mode, setMode] = useState<Mode>("signin");
   const [name, setName] = useState("");
@@ -103,21 +101,13 @@ function AuthPage() {
     if (result.redirected) return;
   }
 
-  async function onDemo() {
+  /** Local demo session: no network, works the same on mobile and desktop. */
+  function onDemo() {
     setError("");
+    setNotice("");
     setBusy("demo");
-    try {
-      await ensureDemoAccount();
-      const { error: err } = await supabase.auth.signInWithPassword({
-        email: DEMO_EMAIL,
-        password: DEMO_PASSWORD,
-      });
-      if (err) throw err;
-    } catch (err) {
-      setError(err instanceof Error ? err.message : t("errorTitle"));
-    } finally {
-      setBusy(null);
-    }
+    startDemo();
+    void router.navigate({ to: "/dashboard", replace: true });
   }
 
   return (
