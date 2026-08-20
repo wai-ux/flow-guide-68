@@ -129,10 +129,11 @@ function TopicPage() {
             <h2 id="branch-title" className="mt-3 text-lg leading-snug">
               {L(active.title)}
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{L(active.summary)}</p>
-            <p className="mt-3 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
-              {active.minutes} {t("minutes")} ·{" "}
-              {status === "understood" ? t("understood") : status === "gap" ? t("toReview") : status === "studied" ? t("studied") : t("notStarted")}
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {L(active.summary)}
+            </p>
+            <p className="mt-2 text-[0.75rem] text-muted-foreground">
+              {active.minutes} {t("minutes")}
             </p>
 
             <div className="mt-6 gk-rule pt-5">
