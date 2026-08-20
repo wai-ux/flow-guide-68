@@ -51,7 +51,8 @@ function fmt(date: string | null, lang: string) {
 
 function SettingsPage() {
   const { t, lang } = useLang();
-  const { user, profile } = useAuth();
+  const { user, profile, signOut } = useAuth();
+  const router = useRouter();
   const { sub, isPro, subscribe, buyAssessment, cancel, resume } = useSubscription();
   const [confirming, setConfirming] = useState(false);
   const [justUpgraded, setJustUpgraded] = useState(false);
