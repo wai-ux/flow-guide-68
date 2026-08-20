@@ -72,7 +72,7 @@ function Today() {
                 {t("todayQuestion")}
               </h1>
             </div>
-            <Link to="/plan">
+            <Link to="/start">
               <Button size="md" className="w-full gap-2 sm:w-auto">
                 {t("buildPlan")}
                 <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2">
