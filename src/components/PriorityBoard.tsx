@@ -96,18 +96,23 @@ export function PriorityBoard() {
                 isUrgent && "border-urgent/25 bg-urgent-soft/40",
               )}
             >
-              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 border-b border-border pb-2.5">
                 <h2
                   id={`bucket-${b}`}
                   className={cn(
-                    "flex min-w-0 items-center gap-2 text-[0.6875rem] font-semibold uppercase tracking-[0.09em]",
-                    isUrgent ? meta.text : "text-muted-foreground",
+                    "flex min-w-0 items-center gap-2 text-[0.8125rem] font-bold uppercase tracking-[0.12em]",
+                    isUrgent ? meta.text : "text-foreground",
                   )}
                 >
-                  <span aria-hidden className={cn("size-1.5 shrink-0 rounded-full", meta.dot)} />
+                  <span aria-hidden className={cn("size-2.5 shrink-0 rounded-full", meta.dot)} />
                   <span className="truncate">{t(meta.label)}</span>
                 </h2>
-                <span className="shrink-0 text-[0.6875rem] tabular-nums text-muted-foreground">
+                <span
+                  className={cn(
+                    "grid size-6 shrink-0 place-items-center rounded-full text-[0.75rem] font-bold tabular-nums",
+                    isUrgent ? cn("bg-urgent/15", meta.text) : "bg-secondary text-foreground",
+                  )}
+                >
                   {list.length}
                 </span>
               </div>
