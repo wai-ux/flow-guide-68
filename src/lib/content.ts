@@ -139,7 +139,7 @@ const backprop: Concept = {
     mm: "အထွက်မှ အမှားကို layer အလိုက် ပြန်တွန်းပို့ခြင်းဖြင့် weight တစ်ခုချင်း သူ့ပါဝင်မှုကို သိရသည်။",
   },
   minutes: 30,
-  sourceIds: ["s5", "s1", "s6"],
+  sourceIds: ["s5", "s9", "s6"],
   prompt: {
     en: "Why is backpropagation necessary when training a neural network?",
     mm: "Neural network တစ်ခု သင်ကြားရာမှာ backpropagation ဘာလို့ လိုအပ်တာလဲ?",
@@ -163,7 +163,7 @@ const backprop: Concept = {
         mm: "Layer တစ်ခုစီ သူ့မတိုင်ခင်၏ function ဖြစ်သဖြင့် အသေးအမွှား ပြောင်းလဲမှုသည် local slope များ၏ ရလဒ်အဖြစ် ကူးသွားသည်။",
       },
       minutes: 12,
-      sourceIds: ["s6"],
+      sourceIds: ["s6", "s9"],
       prompt: {
         en: "In one nudge: if a weight deep in the network changes slightly, how does the loss feel it?",
         mm: "Network အတွင်းပိုင်း weight တစ်ခု အနည်းငယ် ပြောင်းလိုက်လျှင် loss က ဘယ်လို သိလဲ?",
@@ -384,7 +384,7 @@ export const topics: Topic[] = [
           mm: "ပုံစံတစ်ခုသည် ပုံ၏ မည်သည့်နေရာမှာမဆို ပုံစံတူဖြစ်သဖြင့် filter တူတူ ရွေ့သုံးသည်။",
         },
         minutes: 22,
-        sourceIds: ["s1"],
+        sourceIds: ["s10", "s1"],
         prompt: { en: "What does weight sharing buy you?", mm: "Weight မျှဝေခြင်းက ဘာအကျိုးရလဲ?" },
         expects: { en: "Fewer parameters, translation invariance.", mm: "Parameter နည်းခြင်း၊ နေရာမရွေး ဖမ်းနိုင်ခြင်း။" },
         gap: { en: "Parameter count covered, invariance missing.", mm: "Parameter အရေအတွက် ပါသော်လည် invariance မပါပါ။" },
