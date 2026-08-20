@@ -105,6 +105,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
 
   // Persist to the member's account (debounced).
   useEffect(() => {
+    console.log("PERSIST-EFFECT", { hydrated, user: user?.id, ref: loadedFor.current });
     if (!hydrated || !user || loadedFor.current !== user.id) return;
     const id = window.setTimeout(() => {
       void (async () => {
