@@ -8,7 +8,12 @@ export type Source = {
   title: L;
   meta: L;
   minutes: number;
+  /** Where it lives. Absent = your own upload/notes. */
+  url?: string;
+  /** Short site label, e.g. "YouTube", "Wikipedia" */
+  host?: string;
 };
+
 
 export type Concept = {
   id: string;
