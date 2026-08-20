@@ -53,29 +53,23 @@ function Landing() {
         </div>
       </header>
 
-      <main className="mx-auto max-w-3xl px-5 py-20 sm:py-28">
-        <Pill tone="primary">{t("appName")}</Pill>
-        <h1 className="mt-5 max-w-2xl text-[2rem] leading-[1.15] sm:text-[2.5rem]">{t("tagline")}</h1>
-        <p className="mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground">{t("emptyPlanBody")}</p>
+      <main className="mx-auto max-w-2xl px-5 py-24 sm:py-32">
+        <h1 className="max-w-2xl text-[2rem] leading-[1.15] sm:text-[2.5rem]">{t("tagline")}</h1>
 
-        <div className="mt-8 flex flex-wrap gap-2.5">
+        <div className="mt-8 flex flex-wrap items-center gap-3">
           <Link to="/auth">
             <Button size="lg">{t("getStarted")}</Button>
           </Link>
-          <Link to="/auth">
-            <Button size="lg" variant="outline">
-              {t("demoLogin")}
-            </Button>
+          <Link to="/auth" className="text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+            {t("demoLogin")}
           </Link>
         </div>
 
-        <ol className="mt-14 grid gap-3 sm:grid-cols-2">
+        <ol className="mt-16 space-y-2.5 text-sm">
           {steps.map((key, i) => (
-            <li key={key} className="gk-panel p-4">
-              <span className="gk-eyebrow">
-                {t("step")} {i + 1}
-              </span>
-              <p className="mt-1.5 text-[0.9375rem] font-semibold">{t(key)}</p>
+            <li key={key} className="flex gap-3">
+              <span className="w-4 shrink-0 tabular-nums text-muted-foreground">{i + 1}</span>
+              <span>{t(key)}</span>
             </li>
           ))}
         </ol>
