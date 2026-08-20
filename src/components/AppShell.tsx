@@ -125,12 +125,22 @@ export function AppShell({
             <ThemeSwitch />
             {user && (
               <div className="flex items-center gap-2 border-l border-border pl-2">
-                <span
-                  className="hidden max-w-32 truncate text-[0.75rem] text-muted-foreground md:block"
+                <Link
+                  to="/settings"
+                  className="flex items-center gap-1.5 rounded-md px-2 py-1.5 text-[0.75rem] font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                  activeProps={{ className: "bg-secondary text-foreground" }}
                   title={user.email ?? undefined}
                 >
-                  {profile?.display_name ?? user.email}
-                </span>
+                  <span className="hidden max-w-28 truncate md:block">
+                    {profile?.display_name ?? user.email}
+                  </span>
+                  <span className="md:hidden">{t("settings")}</span>
+                  {isPro && (
+                    <span className="rounded border border-primary/40 px-1 py-px text-[0.625rem] font-semibold uppercase tracking-wide text-primary">
+                      {t("proBadge")}
+                    </span>
+                  )}
+                </Link>
                 <Button
                   variant="ghost"
                   size="sm"
