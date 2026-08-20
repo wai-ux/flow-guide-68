@@ -96,7 +96,7 @@ function Today() {
           {focusConcept && (
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{L(focusConcept.question)}</p>
           )}
-          <div className="mt-4 rounded-xl border border-border bg-surface p-4">
+          <div className="mt-4 rounded-lg border border-border bg-surface p-4">
             <p className="gk-eyebrow">{t("todayWhy")}</p>
             <p className="mt-1.5 text-[0.8125rem] leading-relaxed">{focusTopic && L(focusTopic.why)}</p>
           </div>
@@ -108,7 +108,7 @@ function Today() {
         </div>
       </Card>
 
-      <section className="mt-6 rounded-2xl border border-border bg-surface p-4">
+      <section className="mt-6 rounded-lg border border-border bg-surface p-4">
         <p className="gk-eyebrow">{t("goalLabel")}</p>
         <div className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
           <p className="text-[0.9375rem] font-semibold">{state.goal}</p>

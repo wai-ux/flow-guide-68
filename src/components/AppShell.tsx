@@ -12,19 +12,20 @@ function LangSwitch() {
     <div
       role="group"
       aria-label={t("langLabel")}
-      className="flex items-center rounded-full border border-border bg-card p-0.5"
+      className="flex items-center gap-1 rounded-md border border-border p-0.5"
     >
       {(["en", "mm"] as const).map((l) => (
         <button
           key={l}
           onClick={() => setLang(l)}
           aria-pressed={lang === l}
+          title={l === "en" ? "English" : "မြန်မာ"}
           className={cn(
-            "rounded-full px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wider transition-colors",
-            lang === l ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:text-foreground",
+            "rounded px-2 py-1 font-sans text-[0.6875rem] font-semibold uppercase tracking-wider transition-colors",
+            lang === l ? "bg-secondary text-foreground" : "text-muted-foreground hover:text-foreground",
           )}
         >
-          {l === "en" ? "EN" : "မြန်မာ"}
+          {l === "en" ? "EN" : "MM"}
         </button>
       ))}
     </div>
@@ -38,7 +39,7 @@ function ThemeSwitch() {
     <button
       onClick={toggle}
       aria-label={mode === "dark" ? t("lightMode") : t("darkMode")}
-      className="grid size-8 place-items-center rounded-full border border-border bg-card text-muted-foreground transition-colors hover:text-foreground"
+      className="grid size-8 place-items-center rounded-md border border-border text-muted-foreground transition-colors hover:text-foreground"
     >
       {mode === "dark" ? (
         <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.8">
