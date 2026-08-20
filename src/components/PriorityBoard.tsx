@@ -23,7 +23,7 @@ export function TopicCard({ topicId }: { topicId: string }) {
     <Link
       to="/topic/$id"
       params={{ id: topic.id }}
-      className="group block rounded-xl border border-border bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-border-strong hover:shadow-lift"
+      className="group block rounded-lg border border-border bg-card p-4 transition-colors hover:border-border-strong"
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-[0.9375rem] font-semibold leading-snug">{L(topic.title)}</h3>
@@ -64,8 +64,7 @@ export function PriorityBoard() {
             <section
               key={b}
               aria-labelledby={`bucket-${b}`}
-              className="rounded-2xl border border-border bg-surface p-4"
-              style={{ borderLeft: `3px solid var(--color-${b})` }}
+              className="rounded-lg border border-border bg-surface p-4"
             >
               <div className="flex items-baseline justify-between gap-2">
                 <div>
@@ -89,7 +88,7 @@ export function PriorityBoard() {
       </div>
 
       {filtered.length > 0 && (
-        <section aria-labelledby="bucket-filtered" className="rounded-2xl border border-dashed border-border p-4">
+        <section aria-labelledby="bucket-filtered" className="rounded-lg border border-dashed border-border p-4">
           <h2 id="bucket-filtered" className="gk-eyebrow">
             {t("filteredOut")}
           </h2>

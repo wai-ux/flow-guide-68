@@ -15,7 +15,7 @@ export function Button({ className, variant = "primary", size = "md", ...props }
         size === "md" && "px-4 py-2.5 text-sm",
         size === "lg" && "px-5 py-3 text-[0.9375rem]",
         variant === "primary" &&
-          "bg-primary text-primary-foreground shadow-card hover:brightness-110 active:translate-y-px",
+          "bg-primary text-primary-foreground hover:brightness-110",
         variant === "outline" &&
           "border border-border-strong bg-card text-foreground hover:bg-secondary active:translate-y-px",
         variant === "ghost" && "text-muted-foreground hover:bg-secondary hover:text-foreground",
@@ -70,19 +70,26 @@ export function Pill({
   children: ReactNode;
   className?: string;
 }) {
+  const dot =
+    tone === "urgent"
+      ? "bg-urgent"
+      : tone === "priority"
+        ? "bg-priority"
+        : tone === "foundation"
+          ? "bg-foundation"
+          : tone === "later"
+            ? "bg-later"
+            : tone === "primary"
+              ? "bg-primary"
+              : "bg-border-strong";
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.6875rem] font-bold uppercase tracking-wider",
-        tone === "neutral" && "bg-secondary text-muted-foreground",
-        tone === "primary" && "bg-primary/12 text-primary",
-        tone === "urgent" && "bg-urgent-soft text-urgent",
-        tone === "priority" && "bg-priority-soft text-priority",
-        tone === "foundation" && "bg-foundation-soft text-foundation",
-        tone === "later" && "bg-later-soft text-later",
+        "inline-flex items-center gap-1.5 text-[0.6875rem] font-semibold uppercase tracking-wider text-muted-foreground",
         className,
       )}
     >
+      <span aria-hidden className={cn("size-1.5 rounded-full", dot)} />
       {children}
     </span>
   );
