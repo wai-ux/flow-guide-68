@@ -5,9 +5,10 @@ import { LearningTree } from "@/components/LearningTree";
 import { SourceRow } from "@/components/SourceRow";
 import { UnderstandingCheck } from "@/components/UnderstandingCheck";
 import { Button, Card, Pill, Progress } from "@/components/ui/primitives";
-import { findTopic, flatConcepts, sources } from "@/lib/content";
+import { conceptPath, findTopic, flatConcepts, sources } from "@/lib/content";
 import { useL, useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
+
 
 export const Route = createFileRoute("/topic/$id")({
   loader: ({ params }) => {
