@@ -129,10 +129,11 @@ function TopicPage() {
             <h2 id="branch-title" className="mt-3 text-lg leading-snug">
               {L(active.title)}
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{L(active.summary)}</p>
-            <p className="mt-3 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
-              {active.minutes} {t("minutes")} ·{" "}
-              {status === "understood" ? t("understood") : status === "gap" ? t("toReview") : status === "studied" ? t("studied") : t("notStarted")}
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+              {L(active.summary)}
+            </p>
+            <p className="mt-2 text-[0.75rem] text-muted-foreground">
+              {active.minutes} {t("minutes")}
             </p>
 
             <div className="mt-6 gk-rule pt-5">
@@ -213,14 +214,12 @@ function TopicPage() {
         </section>
 
 
-        <aside aria-labelledby="tree-title" className="order-1 lg:order-2">
-          <div className="gk-panel p-4 lg:sticky lg:top-20">
-            <h2 id="tree-title" className="gk-eyebrow">
-              {t("branch")}
-            </h2>
-            <div className="mt-3">
-              <LearningTree concepts={topic.concepts} activeId={active.id} onSelect={setActiveId} />
-            </div>
+        <aside aria-labelledby="tree-title" className="order-1 lg:order-2 lg:sticky lg:top-20 lg:self-start">
+          <h2 id="tree-title" className="gk-eyebrow">
+            {t("branch")}
+          </h2>
+          <div className="mt-3">
+            <LearningTree concepts={topic.concepts} activeId={active.id} onSelect={setActiveId} />
           </div>
         </aside>
       </div>

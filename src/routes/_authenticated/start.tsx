@@ -1,7 +1,7 @@
 import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AppShell } from "@/components/AppShell";
-import { Button, Card, Input, Progress, Spinner, Textarea } from "@/components/ui/primitives";
+import { Button, Input, Progress, Spinner, Textarea } from "@/components/ui/primitives";
 import { useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
@@ -97,7 +97,7 @@ function StartPage() {
         {step === 1 ? (
           <form onSubmit={submitGoal} className="mt-4">
             <h1 className="text-2xl sm:text-3xl">{t("goalTitle")}</h1>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t("goalHelp")}</p>
+
 
             <div className="mt-6 space-y-4">
               <div>
@@ -187,7 +187,7 @@ function StartPage() {
         ) : (
           <div className="mt-4">
             <h1 className="text-2xl sm:text-3xl">{t("resourcesTitle")}</h1>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t("resourcesHelp")}</p>
+
 
             <div className="mt-6 space-y-4">
               <button
@@ -231,28 +231,26 @@ function StartPage() {
                 </Button>
               </form>
 
-              <Card className="p-4">
-                {state.resources.length === 0 ? (
-                  <p className="py-2 text-center text-[0.8125rem] text-muted-foreground">{t("resourceEmpty")}</p>
-                ) : (
-                  <ul className="divide-y divide-border">
-                    {state.resources.map((r) => (
-                      <li key={r.id} className="flex items-center gap-3 py-2.5">
-                        <span className="grid size-7 shrink-0 place-items-center rounded-md bg-secondary text-[0.625rem] font-bold uppercase text-muted-foreground">
-                          {r.kind === "file" ? "PDF" : "URL"}
-                        </span>
-                        <span className="min-w-0 truncate text-[0.8125rem]">{r.name}</span>
-                        <button
-                          onClick={() => removeResource(r.id)}
-                          className="ml-auto shrink-0 text-[0.75rem] text-muted-foreground underline-offset-4 hover:text-destructive hover:underline"
-                        >
-                          {t("remove")}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </Card>
+              {state.resources.length === 0 ? (
+                <p className="text-[0.8125rem] text-muted-foreground">{t("resourceEmpty")}</p>
+              ) : (
+                <ul className="divide-y divide-border">
+                  {state.resources.map((r) => (
+                    <li key={r.id} className="flex items-center gap-3 py-2.5">
+                      <span className="shrink-0 text-[0.625rem] font-bold uppercase text-muted-foreground">
+                        {r.kind === "file" ? "PDF" : "URL"}
+                      </span>
+                      <span className="min-w-0 truncate text-[0.8125rem]">{r.name}</span>
+                      <button
+                        onClick={() => removeResource(r.id)}
+                        className="ml-auto shrink-0 text-[0.75rem] text-muted-foreground underline-offset-4 hover:text-destructive hover:underline"
+                      >
+                        {t("remove")}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               {error && (
                 <p role="alert" className="text-[0.8125rem] text-destructive">

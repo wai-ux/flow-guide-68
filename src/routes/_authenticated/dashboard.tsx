@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { PriorityBoard, TopicCard } from "@/components/PriorityBoard";
 import { Button, Pill, Progress } from "@/components/ui/primitives";
-import { flatConcepts, topics } from "@/lib/content";
 import { useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
 
@@ -59,87 +58,39 @@ function Today() {
     );
   }
 
-  const gapTopics = topics.filter((tp) => flatConcepts(tp).some((c) => state.gaps.includes(c.id)));
-
   return (
     <AppShell>
-      <div className="space-y-12">
-        <header className="space-y-6">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <p className="gk-eyebrow">{t("greeting")}</p>
-              <h1 className="mt-2.5 max-w-2xl text-[1.75rem] leading-[1.2] tracking-tight sm:text-[2.125rem]">
-                {t("todayQuestion")}
-              </h1>
-            </div>
-            <Link to="/start">
-              <Button size="md" className="w-full gap-2 sm:w-auto">
-                {t("buildPlan")}
-                <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-              </Button>
-            </Link>
+      <div className="space-y-10">
+        <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+          <div className="min-w-0">
+            <h1 className="max-w-2xl text-[1.75rem] leading-[1.2] tracking-tight sm:text-[2.125rem]">
+              {t("todayQuestion")}
+            </h1>
+            <p className="mt-2 truncate text-sm text-muted-foreground">
+              {state.goal} · {overallProgress}% {t("progress")}
+            </p>
+            <Progress value={overallProgress} className="mt-3 h-1 max-w-xs" />
           </div>
-
-          <div className="gk-panel grid gap-5 p-4 sm:grid-cols-[minmax(0,1fr)_15rem] sm:items-center sm:p-5">
-            <div className="min-w-0">
-              <p className="gk-eyebrow">{t("goalLabel")}</p>
-              <div className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <p className="text-[0.9375rem] font-semibold">{state.goal}</p>
-                <Link to="/start" className="text-[0.75rem] text-primary underline-offset-4 hover:underline">
-                  {t("editGoal")}
-                </Link>
-              </div>
-              <p className="mt-1 text-[0.75rem] text-muted-foreground">
-                {state.resources.length} {t("resourcesCount")} · {state.hours} {t("perDay")}
-              </p>
-            </div>
-            <div className="sm:border-l sm:border-border sm:pl-5">
-              <div className="flex items-baseline justify-between gap-2">
-                <span className="gk-eyebrow">{t("progress")}</span>
-                <span className="text-sm font-bold tabular-nums">{overallProgress}%</span>
-              </div>
-              <Progress value={overallProgress} className="mt-2 h-1" />
-            </div>
-          </div>
+          <Link to="/start" className="shrink-0">
+            <Button size="lg" className="w-full sm:w-auto">
+              {t("buildPlan")}
+            </Button>
+          </Link>
         </header>
 
         {focusTopic && (
-          <section aria-labelledby="focus-title" className="gk-panel p-4 sm:p-5">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 id="focus-title" className="gk-eyebrow">
-                {t("focusToday")}
-              </h2>
-              <Link
-                to="/topic/$id"
-                params={{ id: focusTopic.id }}
-                className="text-[0.75rem] font-semibold text-primary underline-offset-4 hover:underline"
-              >
-                {t("startNow")} →
-              </Link>
-            </div>
-            <div className="mt-3">
+          <section aria-labelledby="focus-title">
+            <h2 id="focus-title" className="gk-eyebrow">
+              {t("focusToday")}
+            </h2>
+            <div className="mt-2">
               <TopicCard topicId={focusTopic.id} emphasis />
             </div>
           </section>
         )}
 
-        {gapTopics.length > 0 && (
-          <section aria-labelledby="gaps-title">
-            <h2 id="gaps-title" className="gk-eyebrow">
-              {t("gapFound")}
-            </h2>
-            <div className="mt-3 space-y-2">
-              {gapTopics.map((tp) => (
-                <TopicCard key={tp.id} topicId={tp.id} />
-              ))}
-            </div>
-          </section>
-        )}
-
         <section aria-labelledby="board-title">
-          <h2 id="board-title" className="mb-4 text-lg tracking-tight">
+          <h2 id="board-title" className="gk-eyebrow mb-3">
             {t("attention")}
           </h2>
           <PriorityBoard />

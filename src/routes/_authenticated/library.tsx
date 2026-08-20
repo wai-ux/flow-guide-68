@@ -56,9 +56,7 @@ function LibraryPage() {
   return (
     <AppShell>
       <PageHeader
-        eyebrow={t("library")}
-        title={t("resourcesTitle")}
-        description={t("sourcesHelp")}
+        title={t("library")}
         action={
           <Link to="/start">
             <Button size="sm">{t("add")}</Button>
