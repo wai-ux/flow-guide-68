@@ -146,6 +146,33 @@ export const dict: Dict = {
   continueBranch: { en: "Continue the branch", mm: "အကိုင်းအခက် ဆက်လုပ်" },
   done: { en: "Done for now", mm: "ခေတ္တ ပြီးပါပြီ" },
   retry: { en: "Try again", mm: "ပြန်စမ်း" },
+  // concept checkpoints + recovery path
+  cpTitle: { en: "Concept checkpoints", mm: "အကြောင်းအရာ စစ်ဆေးချက်များ" },
+  cpHelp: {
+    en: "Two quick checks before you explain it yourself.",
+    mm: "ကိုယ်တိုင် ရှင်းပြခင် အမြန်စစ်ဆေးချက် ၂ ခု။" ,
+  },
+  cpProgress: { en: "Checkpoint", mm: "စစ်ဆေးချက်" },
+  cpCorrect: { en: "Correct", mm: "မှန်ပါသည်" },
+  cpWrong: { en: "Not quite", mm: "မမှန်သေးပါ" },
+  cpTests: { en: "Tests", mm: "စစ်သည်" },
+  cpNext: { en: "Next checkpoint", mm: "နောက်စစ်ဆေးချက်" },
+  cpToRecall: { en: "Explain it yourself", mm: "ကိုယ်တိုင် ရှင်းပြပါ" },
+  recoveryTitle: { en: "Recovery path", mm: "ပြန်လည်ကုစားလမ်းကြောင်း" },
+  recoveryHelp: {
+    en: "Built from the checkpoint you missed.",
+    mm: "မှားသွားသော စစ်ဆေးချက်အပေါ် အခြေခံ ဖန်တီးထားသည်။",
+  },
+  recoveryStart: { en: "Start recovery", mm: "ကုစားမှု စတင်" },
+  recoveryRecheck: { en: "Re-check now", mm: "အခု ပြန်စစ်ပါ" },
+  recoveryOpen: { en: "Open source", mm: "အရင်းအမြစ် ဖွင့်" },
+  recovered: { en: "Gap closed", mm: "ချို့တဲ့ချက် ပိတ်ပြီး" },
+  recoveredBody: {
+    en: "You cleared the checkpoint that broke. Continue where you left off.",
+    mm: "မှားသွားသော စစ်ဆေးချက်ကို ဖြေရှင်းပြီးပါပြီ။ ဆက်လုပ်နိုင်ပါသည်။",
+  },
+  continueLearning: { en: "Continue", mm: "ဆက်လုပ်" },
+  skipRecovery: { en: "Skip for now", mm: "ခေတ္တ ကျော်" },
   // states
   loading: { en: "Loading", mm: "ဖွင့်နေသည်" },
   errorTitle: { en: "That didn't go through", mm: "မအောင်မြင်ပါ" },
