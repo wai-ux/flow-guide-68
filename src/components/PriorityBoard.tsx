@@ -70,7 +70,7 @@ export function PriorityBoard() {
               <div className="flex items-baseline justify-between gap-2">
                 <div>
                   <h2 id={`bucket-${b}`} className="flex items-center gap-2 text-[1rem]">
-                    <Pill tone={b}>{t(meta.label)}</Pill>
+                    <Pill tone={meta.label}>{t(meta.label)}</Pill>
                   </h2>
                   <p className="mt-2 text-[0.75rem] text-muted-foreground">{t(meta.why)}</p>
                 </div>
