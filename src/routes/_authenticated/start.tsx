@@ -97,7 +97,7 @@ function StartPage() {
         {step === 1 ? (
           <form onSubmit={submitGoal} className="mt-4">
             <h1 className="text-2xl sm:text-3xl">{t("goalTitle")}</h1>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t("goalHelp")}</p>
+
 
             <div className="mt-6 space-y-4">
               <div>
