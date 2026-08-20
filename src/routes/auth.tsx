@@ -46,6 +46,7 @@ function AuthPage() {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState<null | "email" | "google" | "demo">(null);
   const [error, setError] = useState("");
+  const [notice, setNotice] = useState("");
 
   useEffect(() => {
     if (!loading && session) void router.navigate({ to: "/dashboard", replace: true });
