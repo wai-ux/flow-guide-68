@@ -106,7 +106,7 @@ function Today() {
                 params={{ id: focusTopic.id }}
                 className="text-[0.75rem] font-semibold text-primary underline-offset-4 hover:underline"
               >
-                {t("startNow") ?? ""}
+                {t("startNow")} →
               </Link>
             </div>
             <div className="mt-3">
