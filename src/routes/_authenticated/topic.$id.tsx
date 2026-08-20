@@ -45,6 +45,7 @@ function TopicPage() {
   const all = useMemo(() => flatConcepts(topic), [topic]);
   const [activeId, setActiveId] = useState(all[0]?.id ?? "");
   const [checking, setChecking] = useState(false);
+  const [showAllSources, setShowAllSources] = useState(false);
   const active = all.find((c) => c.id === activeId) ?? all[0];
 
   if (!active) {
