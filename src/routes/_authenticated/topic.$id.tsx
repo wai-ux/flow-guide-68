@@ -80,7 +80,7 @@ function TopicPage() {
     const idx = all.findIndex((c) => c.id === active.id);
     const nxt = all.slice(idx + 1).find((c) => (state.concepts[c.id] ?? "todo") !== "understood");
     if (nxt) setActiveId(nxt.id);
-    else router.navigate({ to: "/" });
+    else router.navigate({ to: "/dashboard" });
   };
 
   return (
