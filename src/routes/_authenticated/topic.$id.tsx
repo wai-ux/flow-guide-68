@@ -213,14 +213,12 @@ function TopicPage() {
         </section>
 
 
-        <aside aria-labelledby="tree-title" className="order-1 lg:order-2">
-          <div className="gk-panel p-4 lg:sticky lg:top-20">
-            <h2 id="tree-title" className="gk-eyebrow">
-              {t("branch")}
-            </h2>
-            <div className="mt-3">
-              <LearningTree concepts={topic.concepts} activeId={active.id} onSelect={setActiveId} />
-            </div>
+        <aside aria-labelledby="tree-title" className="order-1 lg:order-2 lg:sticky lg:top-20 lg:self-start">
+          <h2 id="tree-title" className="gk-eyebrow">
+            {t("branch")}
+          </h2>
+          <div className="mt-3">
+            <LearningTree concepts={topic.concepts} activeId={active.id} onSelect={setActiveId} />
           </div>
         </aside>
       </div>
