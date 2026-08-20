@@ -24,6 +24,7 @@ export const Route = createFileRoute("/_authenticated/settings")({
 
 const freeFeatures = ["featFree1", "featFree2", "featFree3"] as const;
 const proFeatures = ["featPro1", "featPro2", "featPro3", "featPro4"] as const;
+const oneTimeFeatures = ["featOne1", "featOne2", "featOne3", "featOne4"] as const;
 
 function Check({ locked }: { locked?: boolean }) {
   return (
