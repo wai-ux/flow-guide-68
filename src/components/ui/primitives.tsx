@@ -27,7 +27,10 @@ export function Button({ className, variant = "primary", size = "md", ...props }
   );
 }
 
-export function Input({ className, ...props }: InputHTMLAttributes<HTMLInputElement>) {
+export function Input({
+  className,
+  ...props
+}: InputHTMLAttributes<HTMLInputElement> & { ref?: Ref<HTMLInputElement> }) {
   return (
     <input
       className={cn(

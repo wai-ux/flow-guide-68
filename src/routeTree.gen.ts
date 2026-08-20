@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LibraryRouteImport } from './routes/library'
 import { Route as PlanRouteImport } from './routes/plan'
 import { Route as StartRouteImport } from './routes/start'
+import { Route as TopicIdRouteImport } from './routes/topic.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const StartRoute = StartRouteImport.update({
   path: '/start',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TopicIdRoute = TopicIdRouteImport.update({
+  id: '/topic/$id',
+  path: '/topic/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/library': typeof LibraryRoute
   '/plan': typeof PlanRoute
   '/start': typeof StartRoute
+  '/topic/$id': typeof TopicIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/library': typeof LibraryRoute
   '/plan': typeof PlanRoute
   '/start': typeof StartRoute
+  '/topic/$id': typeof TopicIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,14 @@ export interface FileRoutesById {
   '/library': typeof LibraryRoute
   '/plan': typeof PlanRoute
   '/start': typeof StartRoute
+  '/topic/$id': typeof TopicIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/library' | '/plan' | '/start'
+  fullPaths: '/' | '/library' | '/plan' | '/start' | '/topic/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/library' | '/plan' | '/start'
-  id: '__root__' | '/' | '/library' | '/plan' | '/start'
+  to: '/' | '/library' | '/plan' | '/start' | '/topic/$id'
+  id: '__root__' | '/' | '/library' | '/plan' | '/start' | '/topic/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +76,7 @@ export interface RootRouteChildren {
   LibraryRoute: typeof LibraryRoute
   PlanRoute: typeof PlanRoute
   StartRoute: typeof StartRoute
+  TopicIdRoute: typeof TopicIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StartRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/topic/$id': {
+      id: '/topic/$id'
+      path: '/topic/$id'
+      fullPath: '/topic/$id'
+      preLoaderRoute: typeof TopicIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +124,7 @@ const rootRouteChildren: RootRouteChildren = {
   LibraryRoute: LibraryRoute,
   PlanRoute: PlanRoute,
   StartRoute: StartRoute,
+  TopicIdRoute: TopicIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
