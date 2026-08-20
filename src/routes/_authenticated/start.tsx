@@ -187,7 +187,7 @@ function StartPage() {
         ) : (
           <div className="mt-4">
             <h1 className="text-2xl sm:text-3xl">{t("resourcesTitle")}</h1>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t("resourcesHelp")}</p>
+
 
             <div className="mt-6 space-y-4">
               <button
