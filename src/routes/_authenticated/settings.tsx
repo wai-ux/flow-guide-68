@@ -89,7 +89,13 @@ function SettingsPage() {
             </div>
           )}
 
-          <div className="mt-3 grid gap-4 sm:grid-cols-2">
+          {boughtAssessment && (
+            <div className="mt-3 rounded-lg border border-border-strong bg-secondary/40 px-4 py-3 text-sm">
+              {t("oneTimeSuccess")}
+            </div>
+          )}
+
+          <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Card className={`p-5 ${isPro ? "" : "border-border-strong"}`}>
               <div className="flex items-baseline justify-between">
                 <h3 className="text-sm font-semibold">{t("planFree")}</h3>
@@ -105,6 +111,61 @@ function SettingsPage() {
               </ul>
               {!isPro && <p className="mt-4 text-[0.75rem] text-muted-foreground">{t("yourPlanNow")}</p>}
             </Card>
+
+            <Card className={`p-5 ${sub.assessmentCredits > 0 && !isPro ? "border-border-strong" : ""}`}>
+              <div className="flex items-baseline justify-between gap-2">
+                <h3 className="text-sm font-semibold">{t("planOneTime")}</h3>
+                <span className="text-sm">
+                  <span className="font-semibold">${ASSESSMENT_PRICE_USD}</span>
+                  <span className="text-muted-foreground"> · {t("oneTimeTag")}</span>
+                </span>
+              </div>
+              <ul className="mt-3 space-y-2 text-[0.8125rem] text-muted-foreground">
+                {oneTimeFeatures.map((k) => (
+                  <li key={k} className="flex gap-2">
+                    <Check locked={!isPro && sub.assessmentCredits === 0} />
+                    <span>{t(k)}</span>
+                  </li>
+                ))}
+              </ul>
+
+              {isPro ? (
+                <p className="mt-4 text-[0.75rem] text-muted-foreground">{t("oneTimeIncluded")}</p>
+              ) : sub.assessmentCredits > 0 ? (
+                <p className="mt-4 text-[0.75rem] text-muted-foreground">
+                  {t("oneTimeOwned").replace("{date}", fmt(sub.assessmentPurchasedAt, lang))}
+                </p>
+              ) : confirmingOne ? (
+                <div className="mt-4 space-y-3">
+                  <p className="text-[0.8125rem] leading-relaxed">
+                    {t("confirmOneTime").replace("{price}", `$${ASSESSMENT_PRICE_USD}`)}
+                  </p>
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        buyAssessment();
+                        setConfirmingOne(false);
+                        setBoughtAssessment(true);
+                      }}
+                    >
+                      {t("confirmBuy")}
+                    </Button>
+                    <Button size="sm" variant="ghost" onClick={() => setConfirmingOne(false)}>
+                      {t("cancelAction")}
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <Button variant="outline" className="mt-4 w-full" onClick={() => setConfirmingOne(true)}>
+                    {t("buyOneTime").replace("{price}", `$${ASSESSMENT_PRICE_USD}`)}
+                  </Button>
+                  <p className="mt-3 text-[0.6875rem] leading-relaxed text-muted-foreground">{t("billingNote")}</p>
+                </>
+              )}
+            </Card>
+
 
             <Card className={`p-5 ${isPro ? "border-border-strong" : ""}`}>
               <div className="flex items-baseline justify-between">
