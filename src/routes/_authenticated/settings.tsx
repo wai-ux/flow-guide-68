@@ -52,9 +52,11 @@ function fmt(date: string | null, lang: string) {
 function SettingsPage() {
   const { t, lang } = useLang();
   const { user, profile } = useAuth();
-  const { sub, isPro, subscribe, cancel, resume } = useSubscription();
+  const { sub, isPro, subscribe, buyAssessment, cancel, resume } = useSubscription();
   const [confirming, setConfirming] = useState(false);
   const [justUpgraded, setJustUpgraded] = useState(false);
+  const [confirmingOne, setConfirmingOne] = useState(false);
+  const [boughtAssessment, setBoughtAssessment] = useState(false);
 
   return (
     <AppShell>
