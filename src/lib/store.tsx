@@ -107,16 +107,22 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!hydrated || !user || loadedFor.current !== user.id) return;
     const id = window.setTimeout(() => {
-      void supabase.from("learning_state").upsert({
-        user_id: user.id,
-        goal: state.goal,
-        deadline: state.deadline,
-        hours: state.hours,
-        planned: state.planned,
-        resources: state.resources,
-        concepts: state.concepts,
-        gaps: state.gaps,
-      });
+      void (async () => {
+        const { error } = await supabase.from("learning_state").upsert(
+          {
+            user_id: user.id,
+            goal: state.goal,
+            deadline: state.deadline,
+            hours: state.hours,
+            planned: state.planned,
+            resources: state.resources,
+            concepts: state.concepts,
+            gaps: state.gaps,
+          },
+          { onConflict: "user_id" },
+        );
+        if (error) console.error("Could not save your progress", error.message);
+      })();
     }, 600);
     return () => window.clearTimeout(id);
   }, [state, hydrated, user?.id]);
