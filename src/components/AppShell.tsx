@@ -87,9 +87,9 @@ export function AppShell({
         Skip to content
       </a>
 
-      <header className="sticky top-0 z-30 border-b border-border bg-background/85 backdrop-blur-md">
-        <div className="mx-auto flex max-w-5xl items-center gap-4 px-5 py-3">
-          <Link to="/dashboard" className="flex items-center gap-2.5">
+      <header className="sticky top-0 z-30 border-b border-border bg-background/90 backdrop-blur-md">
+        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4 py-2.5 sm:px-6">
+          <Link to="/dashboard" className="flex shrink-0 items-center gap-2.5">
             <span className="grid size-7 place-items-center rounded-md bg-primary text-primary-foreground">
               <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M4 20V8l8-4 8 4v12" />
@@ -99,44 +99,45 @@ export function AppShell({
             <span className="font-display text-[0.9375rem] font-semibold tracking-tight">{t("appName")}</span>
           </Link>
 
-          <nav aria-label="Primary" className="ml-2 hidden items-center gap-1 sm:flex">
+          <nav aria-label="Primary" className="ml-3 hidden items-center gap-0.5 sm:flex">
             {nav.map((n) => (
               <Link
                 key={n.to}
                 to={n.to}
-                className="rounded-md px-2.5 py-1.5 text-[0.8125rem] font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                className="rounded-md px-3 py-1.5 text-[0.8125rem] font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                 activeProps={{ className: "bg-secondary text-foreground" }}
-                
               >
                 {t(n.key)}
               </Link>
             ))}
           </nav>
 
-          <div className="ml-auto flex items-center gap-2">
+          <div className="ml-auto flex items-center gap-1.5">
             <button
               onClick={() => {
                 reset();
                 router.navigate({ to: "/start" as string });
               }}
-              className="hidden text-[0.75rem] text-muted-foreground underline-offset-4 hover:underline md:block"
+              className="hidden rounded-md px-2 py-1.5 text-[0.75rem] font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground lg:block"
             >
               {t("reset")}
             </button>
             <LangSwitch />
             <ThemeSwitch />
             {user && (
-              <div className="flex items-center gap-2 border-l border-border pl-2">
+              <div className="ml-1 flex items-center gap-1.5 border-l border-border pl-2">
                 <Link
                   to="/settings"
                   className="flex items-center gap-1.5 rounded-md px-2 py-1.5 text-[0.75rem] font-medium text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                   activeProps={{ className: "bg-secondary text-foreground" }}
                   title={user.email ?? undefined}
                 >
-                  <span className="hidden max-w-28 truncate md:block">
+                  <span className="grid size-6 shrink-0 place-items-center rounded-full bg-secondary text-[0.625rem] font-bold uppercase text-foreground">
+                    {(profile?.display_name ?? user.email ?? "?").charAt(0)}
+                  </span>
+                  <span className="hidden max-w-28 truncate lg:block">
                     {profile?.display_name ?? user.email}
                   </span>
-                  <span className="md:hidden">{t("settings")}</span>
                   {isPro && (
                     <span className="rounded border border-primary/40 px-1 py-px text-[0.625rem] font-semibold uppercase tracking-wide text-primary">
                       {t("proBadge")}
@@ -146,6 +147,7 @@ export function AppShell({
                 <Button
                   variant="ghost"
                   size="sm"
+                  className="hidden sm:inline-flex"
                   onClick={async () => {
                     await signOut();
                     await router.navigate({ to: "/auth", replace: true });
@@ -160,8 +162,8 @@ export function AppShell({
       </header>
 
       {backTo && (
-        <div className="mx-auto max-w-5xl px-5 pt-5">
-          <Button variant="ghost" size="sm" onClick={() => router.navigate({ to: backTo })}>
+        <div className="mx-auto max-w-6xl px-4 pt-5 sm:px-6">
+          <Button variant="ghost" size="sm" className="-ml-2" onClick={() => router.navigate({ to: backTo })}>
             <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M15 18l-6-6 6-6" />
             </svg>
@@ -170,7 +172,7 @@ export function AppShell({
         </div>
       )}
 
-      <main id="main" className="mx-auto max-w-5xl px-5 pb-24 pt-6">
+      <main id="main" className="mx-auto max-w-6xl px-4 pb-28 pt-8 sm:px-6 sm:pt-10">
         {children}
       </main>
 
@@ -184,12 +186,18 @@ export function AppShell({
               key={n.to}
               to={n.to}
               className="flex-1 py-3 text-center text-[0.75rem] font-medium text-muted-foreground"
-              activeProps={{ className: "text-primary" }}
-              
+              activeProps={{ className: "text-foreground" }}
             >
               {t(n.key)}
             </Link>
           ))}
+          <Link
+            to="/settings"
+            className="flex-1 py-3 text-center text-[0.75rem] font-medium text-muted-foreground"
+            activeProps={{ className: "text-foreground" }}
+          >
+            {t("settings")}
+          </Link>
         </div>
       </nav>
     </div>
