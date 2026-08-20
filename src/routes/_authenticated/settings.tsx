@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { AppShell } from "@/components/AppShell";
-import { Button, Card } from "@/components/ui/primitives";
+import { Button, Card, PageHeader } from "@/components/ui/primitives";
 import { useLang } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
 import { ASSESSMENT_PRICE_USD, PRO_PRICE_USD, useSubscription } from "@/lib/subscription";
