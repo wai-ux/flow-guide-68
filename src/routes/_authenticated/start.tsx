@@ -231,28 +231,26 @@ function StartPage() {
                 </Button>
               </form>
 
-              <Card className="p-4">
-                {state.resources.length === 0 ? (
-                  <p className="py-2 text-center text-[0.8125rem] text-muted-foreground">{t("resourceEmpty")}</p>
-                ) : (
-                  <ul className="divide-y divide-border">
-                    {state.resources.map((r) => (
-                      <li key={r.id} className="flex items-center gap-3 py-2.5">
-                        <span className="grid size-7 shrink-0 place-items-center rounded-md bg-secondary text-[0.625rem] font-bold uppercase text-muted-foreground">
-                          {r.kind === "file" ? "PDF" : "URL"}
-                        </span>
-                        <span className="min-w-0 truncate text-[0.8125rem]">{r.name}</span>
-                        <button
-                          onClick={() => removeResource(r.id)}
-                          className="ml-auto shrink-0 text-[0.75rem] text-muted-foreground underline-offset-4 hover:text-destructive hover:underline"
-                        >
-                          {t("remove")}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </Card>
+              {state.resources.length === 0 ? (
+                <p className="text-[0.8125rem] text-muted-foreground">{t("resourceEmpty")}</p>
+              ) : (
+                <ul className="divide-y divide-border">
+                  {state.resources.map((r) => (
+                    <li key={r.id} className="flex items-center gap-3 py-2.5">
+                      <span className="shrink-0 text-[0.625rem] font-bold uppercase text-muted-foreground">
+                        {r.kind === "file" ? "PDF" : "URL"}
+                      </span>
+                      <span className="min-w-0 truncate text-[0.8125rem]">{r.name}</span>
+                      <button
+                        onClick={() => removeResource(r.id)}
+                        className="ml-auto shrink-0 text-[0.75rem] text-muted-foreground underline-offset-4 hover:text-destructive hover:underline"
+                      >
+                        {t("remove")}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
 
               {error && (
                 <p role="alert" className="text-[0.8125rem] text-destructive">
