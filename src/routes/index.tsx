@@ -96,7 +96,7 @@ function Today() {
           {focusConcept && (
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{L(focusConcept.question)}</p>
           )}
-          <div className="mt-4 rounded-xl bg-surface p-4">
+          <div className="mt-4 rounded-xl border border-border bg-surface p-4">
             <p className="gk-eyebrow">{t("todayWhy")}</p>
             <p className="mt-1.5 text-[0.8125rem] leading-relaxed">{focusTopic && L(focusTopic.why)}</p>
           </div>
