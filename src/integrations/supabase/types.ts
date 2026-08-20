@@ -14,7 +14,150 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      learning_modules: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          estimated_minutes: number
+          id: string
+          level: string
+          slug: string
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string
+          estimated_minutes?: number
+          id?: string
+          level?: string
+          slug: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          estimated_minutes?: number
+          id?: string
+          level?: string
+          slug?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      learning_state: {
+        Row: {
+          concepts: Json
+          created_at: string
+          deadline: string
+          gaps: Json
+          goal: string
+          hours: number
+          planned: boolean
+          resources: Json
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          concepts?: Json
+          created_at?: string
+          deadline?: string
+          gaps?: Json
+          goal?: string
+          hours?: number
+          planned?: boolean
+          resources?: Json
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          concepts?: Json
+          created_at?: string
+          deadline?: string
+          gaps?: Json
+          goal?: string
+          hours?: number
+          planned?: boolean
+          resources?: Json
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          language: string
+          learning_goal: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id: string
+          language?: string
+          learning_goal?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          language?: string
+          learning_goal?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_progress: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          module_slug: string
+          notes: string | null
+          percent: number
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          module_slug: string
+          notes?: string | null
+          percent?: number
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          module_slug?: string
+          notes?: string | null
+          percent?: number
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
