@@ -9,9 +9,33 @@ type Ctx = {
   user: User | null;
   profile: Profile | null;
   loading: boolean;
+  /** True when the local, network-free demo session is active. */
+  isDemo: boolean;
+  startDemo: () => void;
   signOut: () => Promise<void>;
   refreshProfile: () => Promise<void>;
 };
+
+const DEMO_KEY = "gk-demo-session-v1";
+const DEMO_USER_ID = "00000000-0000-4000-8000-000000000demo".slice(0, 36);
+
+const demoUser = {
+  id: DEMO_USER_ID,
+  email: "demo@gatekeeper.app",
+  app_metadata: {},
+  user_metadata: { full_name: "Demo Student" },
+  aud: "authenticated",
+  created_at: new Date(0).toISOString(),
+} as unknown as User;
+
+const demoSession = {
+  access_token: "demo",
+  refresh_token: "demo",
+  token_type: "bearer",
+  expires_in: 3600,
+  expires_at: 9999999999,
+  user: demoUser,
+} as unknown as Session;
 
 const AuthContext = createContext<Ctx | null>(null);
 
