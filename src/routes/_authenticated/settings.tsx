@@ -156,12 +156,9 @@ function SettingsPage() {
                   </div>
                 </div>
               ) : (
-                <>
-                  <Button variant="outline" className="mt-4 w-full" onClick={() => setConfirmingOne(true)}>
-                    {t("buyOneTime").replace("{price}", `$${ASSESSMENT_PRICE_USD}`)}
-                  </Button>
-                  <p className="mt-3 text-[0.6875rem] leading-relaxed text-muted-foreground">{t("billingNote")}</p>
-                </>
+                <Button variant="outline" className="mt-4 w-full" onClick={() => setConfirmingOne(true)}>
+                  {t("buyOneTime").replace("{price}", `$${ASSESSMENT_PRICE_USD}`)}
+                </Button>
               )}
             </Card>
 
