@@ -157,8 +157,7 @@ function TopicPage() {
 
             {kids.length > 0 && (
               <div className="mt-5 gk-rule pt-5">
-                <p className="gk-eyebrow">{t("deeperBranches")}</p>
-                <p className="mt-1.5 text-[0.75rem] text-muted-foreground">{t("deeperHelp")}</p>
+                <p className="gk-eyebrow">3 · {t("deeperBranches")}</p>
                 <ul className="mt-3 space-y-2">
                   {kids.map((k) => {
                     const ks = state.concepts[k.id] ?? "todo";
