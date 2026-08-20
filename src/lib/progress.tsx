@@ -16,14 +16,14 @@ export type ProgressRow = {
  * listens for realtime changes so the dashboard always shows live numbers.
  */
 export function useProgress() {
-  const { user } = useAuth();
+  const { user, isDemo } = useAuth();
   const { state, hydrated, topicProgress } = useStore();
   const [rows, setRows] = useState<ProgressRow[]>([]);
   const lastPushed = useRef<string>("");
 
   // Initial read + realtime subscription for this student's progress.
   useEffect(() => {
-    if (!user) {
+    if (!user || isDemo) {
       setRows([]);
       return;
     }
@@ -57,11 +57,11 @@ export function useProgress() {
       active = false;
       supabase.removeChannel(channel);
     };
-  }, [user?.id]);
+  }, [user?.id, isDemo]);
 
   // Push local topic progress up (debounced, only when something changed).
   useEffect(() => {
-    if (!hydrated || !user || !state.planned) return;
+    if (!hydrated || !user || isDemo || !state.planned) return;
 
     const payload = topics
       .filter((topic) => topic.bucket !== "filtered")
@@ -90,7 +90,7 @@ export function useProgress() {
     }, 800);
 
     return () => window.clearTimeout(timer);
-  }, [state.concepts, state.planned, hydrated, user?.id, topicProgress]);
+  }, [state.concepts, state.planned, hydrated, user?.id, isDemo, topicProgress]);
 
   const tracked = rows.filter((r) => topics.some((t) => t.id === r.module_slug));
   const completed = tracked.filter((r) => r.percent >= 100).length;
