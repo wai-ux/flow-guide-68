@@ -4,6 +4,7 @@ import { useLang } from "@/lib/i18n";
 import { useTheme } from "@/lib/theme";
 import { useStore } from "@/lib/store";
 import { useAuth } from "@/lib/auth";
+import { useSubscription } from "@/lib/subscription";
 import { Button } from "@/components/ui/primitives";
 import { cn } from "@/lib/utils";
 
