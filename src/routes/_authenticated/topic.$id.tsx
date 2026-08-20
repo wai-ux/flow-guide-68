@@ -96,7 +96,6 @@ function TopicPage() {
           )}
         </div>
         <h1 className="mt-3 text-2xl sm:text-3xl">{L(topic.title)}</h1>
-        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground">{L(topic.why)}</p>
         <div className="mt-4 flex max-w-sm items-center gap-3">
           <Progress value={pct} className="flex-1" />
           <span className="shrink-0 whitespace-nowrap text-[0.6875rem] font-semibold tabular-nums text-muted-foreground">
