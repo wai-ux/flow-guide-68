@@ -245,6 +245,10 @@ export const dict: Dict = {
   noAccount: { en: "New here?", mm: "အသစ်လာသူလား?" },
   haveAccount: { en: "Already have an account?", mm: "အကောင့် ရှိပြီးသားလား?" },
   account: { en: "Account", mm: "အကောင့်" },
+  checkEmail: {
+    en: "Account created. Check your inbox for the confirmation link, then sign in.",
+    mm: "အကောင့် ဖွင့်ပြီးပါပြီ။ အီးမေးလ်ထဲရှိ အတည်ပြုလင့်ခ်ကို နှိပ်ပြီး ဝင်ပါ။",
+  },
   // settings & subscription
   settings: { en: "Settings", mm: "ဆက်တင်" },
   settingsSub: {
