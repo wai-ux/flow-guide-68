@@ -17,7 +17,7 @@ export function SourceRow({ source }: { source: Source }) {
     <a
       href="#"
       onClick={(e) => e.preventDefault()}
-      className="flex items-start gap-3 rounded-xl border border-border bg-card p-3.5 shadow-card transition-colors hover:border-border-strong"
+      className="flex items-start gap-3 rounded-lg border border-border bg-card p-3.5 transition-colors hover:border-border-strong"
     >
       <span className="mt-0.5 grid size-8 shrink-0 place-items-center rounded-md bg-secondary text-muted-foreground">
         <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="1.7">
