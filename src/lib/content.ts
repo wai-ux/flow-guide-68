@@ -442,3 +442,92 @@ export function subConcepts(topic: Topic, id: string): Concept[] {
   const path = conceptPath(topic, id);
   return path[path.length - 1]?.children ?? [];
 }
+
+/* ── Short concept checkpoints ─────────────────────────────────────────────
+   Quick 2-option/3-option checks that run before the written explanation.
+   A wrong pick names the concept that broke, which drives the recovery path. */
+
+export type Checkpoint = {
+  id: string;
+  /** The sub-idea this checkpoint tests — shown when it fails. */
+  tests: L;
+  question: L;
+  options: { text: L; correct?: boolean }[];
+  /** Why the wrong picks are wrong / what to look at again. */
+  hint: L;
+};
+
+const distractors: L[] = [
+  {
+    en: "It changes values at random until the error happens to drop.",
+    mm: "အမှား ကျသွားသည်အထိ တန်ဖိုးများကို ကျပန်း ပြောင်းလိုက်တာပါ။",
+  },
+  {
+    en: "It memorises every training example and looks the answer up later.",
+    mm: "သင်ကြားချိန် ဥပမာအားလုံးကို မှတ်ထားပြီး နောက်မှ ပြန်ရှာတာပါ။",
+  },
+  {
+    en: "Only the final output number matters; the steps in between can be ignored.",
+    mm: "နောက်ဆုံး အထွက်တန်ဖိုးသာ အရေးကြီးသည်။ အကြားအဆင့်များ လျစ်လျူရှုနိုင်သည်။",
+  },
+];
+
+/** Checkpoints for a concept: authored ones if present, otherwise derived. */
+export function checkpointsFor(concept: Concept): Checkpoint[] {
+  return [
+    {
+      id: `${concept.id}-cp1`,
+      tests: concept.title,
+      question: concept.question,
+      options: [
+        { text: concept.summary, correct: true },
+        { text: distractors[0]! },
+        { text: distractors[1]! },
+      ],
+      hint: concept.summary,
+    },
+    {
+      id: `${concept.id}-cp2`,
+      tests: concept.gapFix,
+      question: {
+        en: `What must a strong explanation of "${concept.title.en}" connect?`,
+        mm: `"${concept.title.mm}" ကို ရှင်းပြရာမှာ ဘာကို ချိတ်ဆက်ပြရမလဲ?`,
+      },
+      options: [
+        { text: concept.expects, correct: true },
+        { text: distractors[2]! },
+        { text: concept.gap },
+      ],
+      hint: concept.expects,
+    },
+  ];
+}
+
+/** Recovery path: the ordered steps that close a failed checkpoint. */
+export type RecoveryStep = { label: L; body: L; sourceId?: string };
+
+export function recoveryPath(concept: Concept, failed: Checkpoint[]): RecoveryStep[] {
+  const steps: RecoveryStep[] = [
+    {
+      label: { en: "The concept that broke", mm: "မရှင်းလင်းသေးသော အကြောင်းအရာ" },
+      body: failed[0]?.tests ?? concept.title,
+    },
+  ];
+  const sid = concept.sourceIds[0];
+  if (sid && sources[sid]) {
+    steps.push({
+      label: { en: "Review this source", mm: "ဒီအရင်းအမြစ်ကို ပြန်ကြည့်ပါ" },
+      body: sources[sid]!.title,
+      sourceId: sid,
+    });
+  }
+  steps.push({
+    label: { en: "Micro-branch", mm: "အသေးစား အကိုင်းအခက်" },
+    body: concept.gapFix,
+  });
+  steps.push({
+    label: { en: "Re-check, then continue", mm: "ပြန်စစ်ပြီး ဆက်လုပ်ပါ" },
+    body: failed[0]?.hint ?? concept.expects,
+  });
+  return steps;
+}
