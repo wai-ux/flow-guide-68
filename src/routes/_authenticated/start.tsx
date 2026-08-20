@@ -68,7 +68,7 @@ function StartPage() {
     setPhase("loading");
     window.setTimeout(() => {
       update({ planned: true });
-      router.navigate({ to: "/dashboard" });
+      router.navigate({ to: "/plan" });
     }, 1600);
   };
 
