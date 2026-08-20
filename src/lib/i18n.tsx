@@ -94,6 +94,11 @@ export const dict: Dict = {
   later: { en: "Later", mm: "နောက်မှ" },
   laterWhy: { en: "Safe to postpone", mm: "ဆိုင်းထားလို့ ရသည်" },
   topics: { en: "topics", mm: "အကြောင်းအရာ" },
+  searchSources: { en: "Search material…", mm: "အချက်အလက် ရှာရန်…" },
+  allKinds: { en: "All", mm: "အားလုံး" },
+  yourUploads: { en: "Your uploads", mm: "သင်တင်ထားသည်" },
+  itemsCount: { en: "items", mm: "ခု" },
+  noMatches: { en: "Nothing matches that filter.", mm: "ကိုက်ညီသည် မရှိပါ။" },
   // topic
   branch: { en: "Learning branch", mm: "သင်ယူမှု အကိုင်းအခက်" },
   branchHelp: {
