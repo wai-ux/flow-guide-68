@@ -219,6 +219,12 @@ function AuthPage() {
             </p>
           )}
 
+          {notice && (
+            <p role="status" className="rounded-md border border-primary/40 bg-primary/5 px-3 py-2 text-[0.8125rem] text-foreground">
+              {notice}
+            </p>
+          )}
+
           <Button type="submit" className="w-full" disabled={busy !== null}>
             {busy === "email" ? <Spinner /> : null}
             {mode === "signin" ? t("signIn") : t("createAccount")}
