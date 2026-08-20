@@ -28,6 +28,19 @@ export const dict: Dict = {
     mm: "ဥပမာ - သောကြာနေ့ Machine Learning midterm အောင်ရန်",
   },
   goalError: { en: "Please describe your goal to continue.", mm: "ဆက်လက်ရန် ရည်မှန်းချက်ကို ရေးပေးပါ။" },
+  examples: { en: "Tap an example — no typing needed", mm: "ဥပမာတစ်ခု နှိပ်ပါ — ရေးစရာမလိုပါ" },
+  example1: {
+    en: "Pass the Machine Learning midterm on Friday",
+    mm: "သောကြာနေ့ Machine Learning midterm အောင်ရန်",
+  },
+  example2: {
+    en: "Understand neural networks well enough to build one",
+    mm: "Neural network တစ်ခု တည်ဆောက်နိုင်အောင် နားလည်ရန်",
+  },
+  example3: {
+    en: "Finish Assignment 3 on backpropagation this week",
+    mm: "ဒီအတိတ်အတွင်း backpropagation Assignment 3 အပြီးသတ်ရန်",
+  },
   deadline: { en: "Deadline", mm: "နောက်ဆုံးရက်" },
   hoursPerDay: { en: "Study hours per day", mm: "တစ်ရက် သင်ယူချိန် (နာရီ)" },
   next: { en: "Continue", mm: "ဆက်လုပ်" },
