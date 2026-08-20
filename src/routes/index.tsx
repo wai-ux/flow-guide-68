@@ -79,34 +79,6 @@ function Today() {
         </div>
       </header>
 
-      <Card className="mt-5 border-primary/35 p-0">
-        <div className="flex flex-wrap items-center gap-2 border-b border-border px-5 py-3">
-          <Pill tone="primary">{t("todayAnswer")}</Pill>
-          {focusTopic?.dueIn !== undefined && (
-            <span className="text-[0.75rem] font-semibold text-urgent">
-              {focusTopic.dueIn} {t("daysLeft")}
-            </span>
-          )}
-          <span className="ml-auto text-[0.75rem] font-semibold text-muted-foreground">
-            {focusTopic?.minutes} {t("minutes")}
-          </span>
-        </div>
-        <div className="p-5">
-          <h2 className="text-xl leading-snug sm:text-2xl">{focusTopic && L(focusTopic.title)}</h2>
-          {focusConcept && (
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{L(focusConcept.question)}</p>
-          )}
-          <div className="mt-4 rounded-lg border border-border bg-surface p-4">
-            <p className="gk-eyebrow">{t("todayWhy")}</p>
-            <p className="mt-1.5 text-[0.8125rem] leading-relaxed">{focusTopic && L(focusTopic.why)}</p>
-          </div>
-          {focusTopic && (
-            <Link to="/topic/$id" params={{ id: focusTopic.id }} className="mt-5 inline-block">
-              <Button size="lg">{t("startNow")}</Button>
-            </Link>
-          )}
-        </div>
-      </Card>
 
       <section className="mt-6 rounded-lg border border-border bg-surface p-4">
         <p className="gk-eyebrow">{t("goalLabel")}</p>
