@@ -137,8 +137,65 @@ const backprop: Concept = {
       expects: { en: "Product of local derivatives along the path.", mm: "လမ်းကြောင်းတစ်လျှောက် local derivative များ၏ မြှောက်လဒ်။" },
       gap: { en: "The path from weight to loss is still missing.", mm: "Weight မှ loss သို့ လမ်းကြောင်း မပါသေးပါ။" },
       gapFix: { en: "Trace one path end to end", mm: "လမ်းကြောင်းတစ်ခုကို အစမှအဆုံး ဆွဲကြည့်ပါ" },
+      children: [
+        {
+          id: "c-local-deriv",
+          title: { en: "Local derivatives at one node", mm: "Node တစ်ခု၏ local derivative" },
+          question: { en: "What does one node contribute?", mm: "Node တစ်ခု ဘာပါဝင်မှု ပေးလဲ?" },
+          summary: {
+            en: "Every node only needs to know its own slope; backprop stitches those slopes together.",
+            mm: "Node တစ်ခုစီ သူ့ slope ကိုသာ သိရသည်။ Backprop က ထို slope များကို ချိတ်ဆက်ပေးသည်။",
+          },
+          minutes: 8,
+          sourceIds: ["s6"],
+          prompt: {
+            en: "Why is it enough for a node to know only its own derivative?",
+            mm: "Node တစ်ခုက သူ့ derivative ကိုသာ သိရင် ဘာလို့ လုံလောက်လဲ?",
+          },
+          expects: { en: "Because the incoming gradient carries everything downstream.", mm: "အဝင် gradient သည် အောက်ပိုင်းအားလုံးကို သယ်လာသဖြင့်။" },
+          gap: { en: "The incoming gradient's role isn't explained.", mm: "အဝင် gradient ၏ အခန်းကနေ မရှင်းပြရသေးပါ။" },
+          gapFix: { en: "Follow one gradient into a node", mm: "Gradient တစ်ခု node အထဲ ဝင်သွားပုံ ကြည့်ပါ" },
+        },
+        {
+          id: "c-two-paths",
+          title: { en: "When two paths meet", mm: "လမ်းကြောင်း နှစ်ခု ဆုံသည့်အခါ" },
+          question: { en: "Why do gradients add?", mm: "Gradient များ ဘာလို့ ပေါင်းလဲ?" },
+          summary: {
+            en: "If a weight influences the loss through two routes, its total effect is the sum of both routes.",
+            mm: "Weight တစ်ခုက loss ကို လမ်းကြောင်း နှစ်ခုမှ ထိခိုက်လျှင် စုစုပေါင်း အကျိုးသက်ရောက်မှုသည် နှစ်ခု၏ ပေါင်းလဒ် ဖြစ်သည်။",
+          },
+          minutes: 10,
+          sourceIds: ["s6", "s5"],
+          prompt: {
+            en: "A hidden unit feeds two outputs. How is its gradient formed?",
+            mm: "Hidden unit တစ်ခု အထွက် နှစ်ခုကို ပေးနေလျှင် သူ့ gradient ဘယ်လို ဖြစ်လာလဲ?",
+          },
+          expects: { en: "Sum the contributions from both output paths.", mm: "အထွက် လမ်းကြောင်း နှစ်ခု၏ ပါဝင်မှုကို ပေါင်းရမည်။" },
+          gap: { en: "You picked one path and stopped.", mm: "လမ်းကြောင်းတစ်ခုသာ ရွေးပြီး ရပ်လိုက်ပါသည်။" },
+          gapFix: { en: "Add both routes, then compare", mm: "လမ်းကြောင်း နှစ်ခု ပေါင်းပြီး နှိုင်းယှဉ်ပါ" },
+        },
+      ],
+    },
+    {
+      id: "c-credit",
+      title: { en: "Credit assignment", mm: "ပါဝင်မှု ခွဲခြားခြင်း" },
+      question: { en: "Which weight caused the error?", mm: "ဘယ် weight က အမှားကို ဖြစ်စေလဲ?" },
+      summary: {
+        en: "Backprop answers 'how much is this weight to blame?' — that number is the update.",
+        mm: "Backprop က 'ဒီ weight ဘယ်လောက် တာဝန်ရှိလဲ' ကို ဖြေပေးသည်။ ထိုကိန်းသည် update ဖြစ်သည်။",
+      },
+      minutes: 14,
+      sourceIds: ["s5", "s1"],
+      prompt: {
+        en: "Two weights get different updates from the same error. Why?",
+        mm: "အမှားတူတူမှ weight နှစ်ခု update မတူတာ ဘာလို့လဲ?",
+      },
+      expects: { en: "Their sensitivity to the loss differs along their own paths.", mm: "သူတို့၏ လမ်းကြောင်းအလိုက် loss အပေါ် အထိခိုက်လွယ်မှု မတူသဖြင့်။" },
+      gap: { en: "You treated the error as if it were shared equally.", mm: "အမှားကို အညီအမျှ မျှဝေထားသလို ယူဆထားပါသည်။" },
+      gapFix: { en: "Compare two weights on one example", mm: "ဥပမာတစ်ခုတွင် weight နှစ်ခု နှိုင်းယှဉ်ပါ" },
     },
   ],
+
 };
 
 export const topics: Topic[] = [
