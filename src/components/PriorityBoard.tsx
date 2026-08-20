@@ -81,8 +81,8 @@ export function PriorityBoard() {
   const filtered = bucketTopics("filtered");
 
   return (
-    <div className="space-y-8">
-      <div className="grid gap-4 lg:grid-cols-2">
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {bucketOrder.map((b) => {
           const list = bucketTopics(b);
           const meta = bucketMeta[b];
@@ -92,30 +92,27 @@ export function PriorityBoard() {
               key={b}
               aria-labelledby={`bucket-${b}`}
               className={cn(
-                "gk-panel p-4 sm:p-5",
+                "gk-panel p-4",
                 isUrgent && "border-urgent/25 bg-urgent-soft/40",
               )}
             >
-              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-3">
-                <div className="min-w-0">
-                  <h2
-                    id={`bucket-${b}`}
-                    className={cn(
-                      "flex items-center gap-2 text-[0.6875rem] font-semibold uppercase tracking-[0.09em]",
-                      isUrgent ? meta.text : "text-muted-foreground",
-                    )}
-                  >
-                    <span aria-hidden className={cn("size-1.5 shrink-0 rounded-full", meta.dot)} />
-                    {t(meta.label)}
-                  </h2>
-                  <p className="mt-1.5 truncate text-[0.75rem] text-muted-foreground">{t(meta.why)}</p>
-                </div>
+              <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3">
+                <h2
+                  id={`bucket-${b}`}
+                  className={cn(
+                    "flex min-w-0 items-center gap-2 text-[0.6875rem] font-semibold uppercase tracking-[0.09em]",
+                    isUrgent ? meta.text : "text-muted-foreground",
+                  )}
+                >
+                  <span aria-hidden className={cn("size-1.5 shrink-0 rounded-full", meta.dot)} />
+                  <span className="truncate">{t(meta.label)}</span>
+                </h2>
                 <span className="shrink-0 text-[0.6875rem] tabular-nums text-muted-foreground">
-                  {list.length} {t("topics")}
+                  {list.length}
                 </span>
               </div>
 
-              <div className="mt-4 space-y-2">
+              <div className="mt-3 space-y-2">
                 {list.map((tp) => (
                   <TopicCard key={tp.id} topicId={tp.id} emphasis={isUrgent} />
                 ))}
@@ -130,15 +127,13 @@ export function PriorityBoard() {
           <h2 id="bucket-filtered" className="gk-eyebrow">
             {t("filteredOut")}
           </h2>
-          <p className="mt-1.5 text-[0.75rem] text-muted-foreground">{t("filteredOutHelp")}</p>
-          <ul className="mt-3 space-y-1.5">
+          <ul className="mt-2 space-y-1.5">
             {filtered.map((tp) => (
               <li
                 key={tp.id}
-                className="flex flex-wrap items-baseline gap-x-2 text-[0.8125rem] text-muted-foreground"
+                className="text-[0.8125rem] text-muted-foreground"
               >
                 <span className="line-through decoration-border-strong">{L(tp.title)}</span>
-                <span className="text-[0.75rem] opacity-70">— {L(tp.why)}</span>
               </li>
             ))}
           </ul>
