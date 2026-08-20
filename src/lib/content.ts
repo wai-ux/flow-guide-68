@@ -307,6 +307,27 @@ export const topics: Topic[] = [
         expects: { en: "Accuracy is a step function — no usable gradient.", mm: "Accuracy သည် step function ဖြစ်၍ gradient မရပါ။" },
         gap: { en: "Missing why accuracy gives no gradient.", mm: "Accuracy က gradient မပေးတာ ဘာလို့လဲ မပါပါ။" },
         gapFix: { en: "Smooth vs step objectives", mm: "Smooth နှင့် step ရည်မှန်းချက် နှိုင်းယှဉ်" },
+        children: [
+          {
+            id: "c-gd",
+            title: { en: "Gradient descent step", mm: "Gradient descent တစ်ဆင့်" },
+            question: { en: "How big should one step be?", mm: "တစ်ဆင့် ဘယ်လောက် ကြီးသင့်လဲ?" },
+            summary: {
+              en: "The gradient gives a direction; the learning rate decides how far to trust it.",
+              mm: "Gradient က လမ်းကြောင်းပေးသည်။ Learning rate က ဘယ်လောက် ယုံရမည်ကို ဆုံးဖြတ်သည်။",
+            },
+            minutes: 12,
+            sourceIds: ["s7"],
+            prompt: {
+              en: "What happens with a learning rate that is far too large?",
+              mm: "Learning rate အလွန်ကြီးလျှင် ဘာဖြစ်လဲ?",
+            },
+            expects: { en: "Overshooting the minimum, loss diverges instead of settling.", mm: "အနိမ့်ဆုံးကို ခုန်ကျော်ပြီး loss တည်မငြိမ်ဘဲ တက်သွားသည်။" },
+            gap: { en: "Direction covered, step size effect missing.", mm: "လမ်းကြောင်း ပါသော်လည် ခြေလှမ်းအရွယ် အကျိုးသက်ရောက်မှု မပါပါ။" },
+            gapFix: { en: "Same slope, two step sizes", mm: "Slope တူတူ၊ ခြေလှမ်း နှစ်မျိုး" },
+          },
+        ],
+
       },
     ],
   },
