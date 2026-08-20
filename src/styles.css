@@ -190,9 +190,31 @@
 @utility gk-eyebrow {
   font-size: 0.6875rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-muted-foreground);
+}
+
+/* One quiet grouping surface. Use instead of stacking bordered cards. */
+@utility gk-panel {
+  background: var(--color-surface);
+  color: var(--color-surface-foreground);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+}
+
+@utility gk-row {
+  border-radius: var(--radius-lg);
+  transition: background-color 150ms ease;
+  &:hover {
+    background: var(--color-secondary);
+  }
+}
+
+@utility gk-meta {
+  font-size: 0.75rem;
+  color: var(--color-muted-foreground);
+  font-variant-numeric: tabular-nums;
 }
 
 @utility gk-tree-line {
