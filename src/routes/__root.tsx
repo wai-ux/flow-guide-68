@@ -15,6 +15,7 @@ import { ThemeProvider } from "@/lib/theme";
 import { LanguageProvider } from "@/lib/i18n";
 import { StoreProvider } from "@/lib/store";
 import { AuthProvider } from "@/lib/auth";
+import { SubscriptionProvider } from "@/lib/subscription";
 
 function NotFoundComponent() {
   return (
@@ -138,10 +139,12 @@ function RootComponent() {
       <ThemeProvider>
         <LanguageProvider>
           <AuthProvider>
-            <StoreProvider>
-            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-              <Outlet />
-            </StoreProvider>
+            <SubscriptionProvider>
+              <StoreProvider>
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                <Outlet />
+              </StoreProvider>
+            </SubscriptionProvider>
           </AuthProvider>
         </LanguageProvider>
       </ThemeProvider>
