@@ -64,7 +64,7 @@ function AuthPage() {
     setBusy("email");
     try {
       if (mode === "signup") {
-        const { error: err } = await supabase.auth.signUp({
+        const { data, error: err } = await supabase.auth.signUp({
           email: parsed.data.email,
           password: parsed.data.password,
           options: {
