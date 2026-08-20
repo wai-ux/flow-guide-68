@@ -8,7 +8,12 @@ export type Source = {
   title: L;
   meta: L;
   minutes: number;
+  /** Where it lives. Absent = your own upload/notes. */
+  url?: string;
+  /** Short site label, e.g. "YouTube", "Wikipedia" */
+  host?: string;
 };
+
 
 export type Concept = {
   id: string;
@@ -40,61 +45,90 @@ export type Topic = {
 export const sources: Record<string, Source> = {
   s1: {
     id: "s1",
-    kind: "pdf",
-    title: { en: "Lecture 06 — Neural Networks (slides)", mm: "သင်ခန်းစာ ၆ — Neural Networks (slides)" },
-    meta: { en: "Prof. Aung · 42 pages · your upload", mm: "ဆရာ အောင် · ၄၂ မျက်နှာ · သင်တင်ထားသည်" },
+    kind: "slides",
+    title: { en: "Lecture 06 — Neural networks", mm: "သင်ခန်းစာ ၆ — Neural networks" },
+    meta: { en: "your upload · 42 pages", mm: "သင်တင်ထားသည် · ၄၂ မျက်နှာ" },
     minutes: 25,
   },
   s2: {
     id: "s2",
     kind: "video",
     title: { en: "But what is a neural network?", mm: "Neural network ဆိုတာ ဘာလဲ?" },
-    meta: { en: "3Blue1Brown · 19 min · pasted link", mm: "3Blue1Brown · ၁၉ မိနစ် · link ထည့်ထားသည်" },
+    meta: { en: "3Blue1Brown · watch on YouTube", mm: "3Blue1Brown · YouTube တွင် ကြည့်ပါ" },
     minutes: 19,
+    url: "https://www.youtube.com/watch?v=aircAruvnKk",
+    host: "YouTube",
   },
   s3: {
     id: "s3",
     kind: "article",
     title: { en: "Activation functions, compared", mm: "Activation functions နှိုင်းယှဉ်ချက်" },
-    meta: { en: "Distill-style explainer · 8 min read", mm: "ရှင်းလင်းချက် ဆောင်းပါး · ၈ မိနစ်" },
+    meta: { en: "Wikipedia · 8 min read", mm: "Wikipedia · ၈ မိနစ် ဖတ်ရန်" },
     minutes: 8,
+    url: "https://en.wikipedia.org/wiki/Activation_function",
+    host: "Wikipedia",
   },
   s4: {
     id: "s4",
     kind: "notes",
     title: { en: "Your tutorial notes — week 5", mm: "သင့် tutorial မှတ်စု — ၅ ပတ်" },
-    meta: { en: "handwritten scan · 6 pages", mm: "လက်ရေးမူ scan · ၆ မျက်နှာ" },
+    meta: { en: "your scan · 6 pages", mm: "သင့် scan · ၆ မျက်နှာ" },
     minutes: 10,
   },
   s5: {
     id: "s5",
     kind: "pdf",
-    title: { en: "Assignment 3 brief — backprop by hand", mm: "Assignment ၃ — backprop လက်နှင့်တွက်" },
-    meta: { en: "due Friday 5pm · graded 20%", mm: "သောကြာ ၅ နာရီ · အမှတ် ၂၀%" },
+    title: { en: "Assignment 3 — backprop by hand", mm: "Assignment ၃ — backprop လက်နှင့်တွက်" },
+    meta: { en: "due Friday 5pm · 20% of grade", mm: "သောကြာ ၅ နာရီ · အမှတ် ၂၀%" },
     minutes: 15,
   },
   s6: {
     id: "s6",
-    kind: "slides",
-    title: { en: "Calculus refresher — chain rule", mm: "Calculus ပြန်လှန်ခြင်း — chain rule" },
-    meta: { en: "Maths dept · 12 slides", mm: "သင်္ချာဌာန · ၁၂ slides" },
+    kind: "video",
+    title: { en: "The chain rule, simply", mm: "Chain rule ကို ရိုးရှင်းစွာ" },
+    meta: { en: "Khan Academy · watch on YouTube", mm: "Khan Academy · YouTube တွင် ကြည့်ပါ" },
     minutes: 12,
+    url: "https://www.youtube.com/watch?v=H-ybCx8gt-8",
+    host: "YouTube",
   },
   s7: {
     id: "s7",
     kind: "article",
     title: { en: "Why loss functions exist", mm: "Loss function ဘာလို့ လိုအပ်လဲ" },
-    meta: { en: "blog · 6 min read", mm: "blog · ၆ မိနစ်" },
+    meta: { en: "Wikipedia · 6 min read", mm: "Wikipedia · ၆ မိနစ် ဖတ်ရန်" },
     minutes: 6,
+    url: "https://en.wikipedia.org/wiki/Loss_function",
+    host: "Wikipedia",
   },
   s8: {
     id: "s8",
     kind: "video",
     title: { en: "Transformers explained", mm: "Transformers ရှင်းလင်းချက်" },
-    meta: { en: "not in this exam scope", mm: "ဒီစာမေးပွဲ အတွင်း မပါဝင်" },
+    meta: { en: "YouTube · not in this exam", mm: "YouTube · ဒီစာမေးပွဲ မပါ" },
     minutes: 32,
+    url: "https://www.youtube.com/watch?v=zxQyTK8quyY",
+    host: "YouTube",
+  },
+  s9: {
+    id: "s9",
+    kind: "article",
+    title: { en: "Backpropagation, step by step", mm: "Backpropagation အဆင့်ဆင့်" },
+    meta: { en: "Wikipedia · 10 min read", mm: "Wikipedia · ၁၀ မိနစ် ဖတ်ရန်" },
+    minutes: 10,
+    url: "https://en.wikipedia.org/wiki/Backpropagation",
+    host: "Wikipedia",
+  },
+  s10: {
+    id: "s10",
+    kind: "video",
+    title: { en: "How CNNs see images", mm: "CNN က ပုံကို ဘယ်လိုမြင်လဲ" },
+    meta: { en: "3Blue1Brown · watch on YouTube", mm: "3Blue1Brown · YouTube တွင် ကြည့်ပါ" },
+    minutes: 21,
+    url: "https://www.youtube.com/watch?v=KuXjwB4LzSA",
+    host: "YouTube",
   },
 };
+
 
 const backprop: Concept = {
   id: "c-backprop",
@@ -105,7 +139,7 @@ const backprop: Concept = {
     mm: "အထွက်မှ အမှားကို layer အလိုက် ပြန်တွန်းပို့ခြင်းဖြင့် weight တစ်ခုချင်း သူ့ပါဝင်မှုကို သိရသည်။",
   },
   minutes: 30,
-  sourceIds: ["s5", "s1", "s6"],
+  sourceIds: ["s5", "s9", "s6"],
   prompt: {
     en: "Why is backpropagation necessary when training a neural network?",
     mm: "Neural network တစ်ခု သင်ကြားရာမှာ backpropagation ဘာလို့ လိုအပ်တာလဲ?",
@@ -129,7 +163,7 @@ const backprop: Concept = {
         mm: "Layer တစ်ခုစီ သူ့မတိုင်ခင်၏ function ဖြစ်သဖြင့် အသေးအမွှား ပြောင်းလဲမှုသည် local slope များ၏ ရလဒ်အဖြစ် ကူးသွားသည်။",
       },
       minutes: 12,
-      sourceIds: ["s6"],
+      sourceIds: ["s6", "s9"],
       prompt: {
         en: "In one nudge: if a weight deep in the network changes slightly, how does the loss feel it?",
         mm: "Network အတွင်းပိုင်း weight တစ်ခု အနည်းငယ် ပြောင်းလိုက်လျှင် loss က ဘယ်လို သိလဲ?",
@@ -350,7 +384,7 @@ export const topics: Topic[] = [
           mm: "ပုံစံတစ်ခုသည် ပုံ၏ မည်သည့်နေရာမှာမဆို ပုံစံတူဖြစ်သဖြင့် filter တူတူ ရွေ့သုံးသည်။",
         },
         minutes: 22,
-        sourceIds: ["s1"],
+        sourceIds: ["s10", "s1"],
         prompt: { en: "What does weight sharing buy you?", mm: "Weight မျှဝေခြင်းက ဘာအကျိုးရလဲ?" },
         expects: { en: "Fewer parameters, translation invariance.", mm: "Parameter နည်းခြင်း၊ နေရာမရွေး ဖမ်းနိုင်ခြင်း။" },
         gap: { en: "Parameter count covered, invariance missing.", mm: "Parameter အရေအတွက် ပါသော်လည် invariance မပါပါ။" },
