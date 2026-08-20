@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AppShell } from "@/components/AppShell";
 import { PriorityBoard, TopicCard } from "@/components/PriorityBoard";
-import { Button, Card, Pill, Progress } from "@/components/ui/primitives";
+import { Button, Pill, Progress } from "@/components/ui/primitives";
 import { flatConcepts, topics } from "@/lib/content";
 import { useL, useLang } from "@/lib/i18n";
 import { useStore } from "@/lib/store";
