@@ -49,6 +49,8 @@ const KEY = "gk-state-v1";
 export function StoreProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<AppState>(initial);
   const [hydrated, setHydrated] = useState(false);
+  const { user, loading: authLoading } = useAuth();
+  const loadedFor = useRef<string | null>(null);
 
   useEffect(() => {
     try {
@@ -60,9 +62,64 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     setHydrated(true);
   }, []);
 
+  // Load the signed-in member's saved state from their account (first time only).
+  useEffect(() => {
+    if (authLoading || !hydrated || !user) return;
+    if (loadedFor.current === user.id) return;
+    loadedFor.current = user.id;
+    let active = true;
+
+    void (async () => {
+      const { data } = await supabase
+        .from("learning_state")
+        .select("goal, deadline, hours, planned, resources, concepts, gaps")
+        .eq("user_id", user.id)
+        .maybeSingle();
+      if (!active) return;
+
+      if (data && data.planned) {
+        setState({
+          goal: data.goal ?? "",
+          deadline: data.deadline ?? "",
+          hours: data.hours ?? 2,
+          planned: Boolean(data.planned),
+          resources: (data.resources as Resource[]) ?? [],
+          concepts: (data.concepts as Record<string, ConceptState>) ?? {},
+          gaps: (data.gaps as string[]) ?? [],
+        });
+      }
+    })();
+
+    return () => {
+      active = false;
+    };
+  }, [authLoading, hydrated, user?.id]);
+
+  useEffect(() => {
+    if (!user) loadedFor.current = null;
+  }, [user]);
+
   useEffect(() => {
     if (hydrated) localStorage.setItem(KEY, JSON.stringify(state));
   }, [state, hydrated]);
+
+  // Persist to the member's account (debounced).
+  useEffect(() => {
+    if (!hydrated || !user || loadedFor.current !== user.id) return;
+    const id = window.setTimeout(() => {
+      void supabase.from("learning_state").upsert({
+        user_id: user.id,
+        goal: state.goal,
+        deadline: state.deadline,
+        hours: state.hours,
+        planned: state.planned,
+        resources: state.resources,
+        concepts: state.concepts,
+        gaps: state.gaps,
+      });
+    }, 600);
+    return () => window.clearTimeout(id);
+  }, [state, hydrated, user?.id]);
 
   const update = useCallback((patch: Partial<AppState>) => setState((s) => ({ ...s, ...patch })), []);
 
