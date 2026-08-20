@@ -4,7 +4,7 @@ import { AppShell } from "@/components/AppShell";
 import { Button, Card } from "@/components/ui/primitives";
 import { useLang } from "@/lib/i18n";
 import { useAuth } from "@/lib/auth";
-import { PRO_PRICE_USD, useSubscription } from "@/lib/subscription";
+import { ASSESSMENT_PRICE_USD, PRO_PRICE_USD, useSubscription } from "@/lib/subscription";
 
 export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
