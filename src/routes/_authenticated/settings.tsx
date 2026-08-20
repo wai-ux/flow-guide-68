@@ -60,11 +60,10 @@ function SettingsPage() {
 
   return (
     <AppShell>
-      <div className="mx-auto max-w-2xl">
-        <h1 className="text-2xl font-semibold tracking-tight">{t("settings")}</h1>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t("settingsSub")}</p>
+      <div className="mx-auto max-w-4xl">
+        <PageHeader eyebrow={t("account")} title={t("settings")} description={t("settingsSub")} className="mb-6" />
 
-        <Card className="mt-6 p-5">
+        <Card className="p-5">
           <h2 className="text-sm font-semibold">{t("account")}</h2>
           <dl className="mt-3 space-y-2 text-sm">
             <div className="flex justify-between gap-4">
@@ -98,7 +97,7 @@ function SettingsPage() {
             </div>
           )}
 
-          <div className="mt-3 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-4 grid gap-4 md:grid-cols-3">
             <Card className={`p-5 ${isPro ? "" : "border-border-strong"}`}>
               <div className="flex items-baseline justify-between">
                 <h3 className="text-sm font-semibold">{t("planFree")}</h3>
@@ -116,7 +115,7 @@ function SettingsPage() {
             </Card>
 
             <Card className={`p-5 ${sub.assessmentCredits > 0 && !isPro ? "border-border-strong" : ""}`}>
-              <div className="flex items-baseline justify-between gap-2">
+              <div className="flex flex-col gap-1">
                 <h3 className="text-sm font-semibold">{t("planOneTime")}</h3>
                 <span className="text-sm">
                   <span className="font-semibold">${ASSESSMENT_PRICE_USD}</span>
