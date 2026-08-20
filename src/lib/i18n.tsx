@@ -131,6 +131,8 @@ export const dict: Dict = {
   buildPlan: { en: "Build my plan", mm: "အစီအစဉ် ဆောက်ပါ" },
   reset: { en: "Reset prototype", mm: "Prototype ပြန်စ" },
   savedToast: { en: "Saved", mm: "သိမ်းပြီး" },
+  resourcesCount: { en: "sources", mm: "အရင်းအမြစ်" },
+  perDay: { en: "hrs/day", mm: "နာရီ/ရက်" },
   lightMode: { en: "Light", mm: "အလင်း" },
   darkMode: { en: "Dark", mm: "အမည်း" },
   langLabel: { en: "Language", mm: "ဘာသာစကား" },

@@ -117,7 +117,7 @@ function Today() {
           </Link>
         </div>
         <p className="mt-1 text-[0.75rem] text-muted-foreground">
-          {state.resources.length} {t("library")} · {state.hours}h/{t("hoursPerDay").toLowerCase().includes("နာရီ") ? "ရက်" : "day"}
+          {state.resources.length} {t("resourcesCount")} · {state.hours} {t("perDay")}
         </p>
       </section>
 
