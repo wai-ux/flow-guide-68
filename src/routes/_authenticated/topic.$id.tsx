@@ -157,7 +157,7 @@ function TopicPage() {
 
             {kids.length > 0 && (
               <div className="mt-5 gk-rule pt-5">
-                <p className="gk-eyebrow">3 · {t("deeperBranches")}</p>
+                <p className="gk-eyebrow">2 · {t("deeperBranches")}</p>
                 <ul className="mt-3 space-y-2">
                   {kids.map((k) => {
                     const ks = state.concepts[k.id] ?? "todo";
@@ -184,7 +184,7 @@ function TopicPage() {
             )}
 
             <div className="mt-5 gk-rule pt-5">
-              <p className="gk-eyebrow">2 · {t("check")}</p>
+              <p className="gk-eyebrow">3 · {t("check")}</p>
               <div className="mt-3 flex flex-wrap items-center gap-2">
                 <Button
                   variant={status === "todo" ? "outline" : "quiet"}
@@ -208,7 +208,6 @@ function TopicPage() {
             {remaining === 0 && (
               <div className="mt-4 rounded-lg border border-primary/30 bg-primary/8 p-4" aria-live="polite">
                 <p className="text-[0.875rem] font-semibold">{t("branchDone")}</p>
-                <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">{t("branchDoneBody")}</p>
               </div>
             )}
           </Card>
@@ -220,7 +219,6 @@ function TopicPage() {
             <h2 id="tree-title" className="gk-eyebrow">
               {t("branch")}
             </h2>
-            <p className="mt-1.5 text-[0.75rem] leading-relaxed text-muted-foreground">{t("branchHelp")}</p>
             <div className="mt-3">
               <LearningTree concepts={topic.concepts} activeId={active.id} onSelect={setActiveId} />
             </div>
