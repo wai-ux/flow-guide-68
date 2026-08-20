@@ -73,6 +73,7 @@ function AuthPage() {
           },
         });
         if (err) throw err;
+        if (!data.session) setNotice(t("checkEmail"));
       } else {
         const { error: err } = await supabase.auth.signInWithPassword({
           email: parsed.data.email,
