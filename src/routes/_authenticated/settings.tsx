@@ -74,6 +74,18 @@ function SettingsPage() {
           </div>
         </dl>
 
+        <Button
+          variant="outline"
+          size="sm"
+          className="mt-4"
+          onClick={async () => {
+            await signOut();
+            await router.navigate({ to: "/auth", replace: true });
+          }}
+        >
+          {t("signOut")}
+        </Button>
+
         <section className="mt-10">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <h2 className="gk-eyebrow">{t("subscription")}</h2>
