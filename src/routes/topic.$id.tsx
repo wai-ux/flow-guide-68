@@ -62,6 +62,15 @@ function TopicPage() {
   const activeSources = active.sourceIds.map((sid) => sources[sid]!).filter(Boolean);
   const pct = topicProgress(topic);
 
+  const path = conceptPath(topic, active.id);
+  const level = Math.max(1, path.length);
+  const stepIndex = all.findIndex((c) => c.id === active.id);
+  const doneCount = all.filter((c) => state.concepts[c.id] === "understood").length;
+  const remaining = all.length - doneCount;
+  const kids = active.children ?? [];
+  const prev = stepIndex > 0 ? all[stepIndex - 1] : undefined;
+  const next = stepIndex < all.length - 1 ? all[stepIndex + 1] : undefined;
+
   const advance = (childId?: string) => {
     setChecking(false);
     if (childId) {
@@ -69,8 +78,8 @@ function TopicPage() {
       return;
     }
     const idx = all.findIndex((c) => c.id === active.id);
-    const next = all.slice(idx + 1).find((c) => (state.concepts[c.id] ?? "todo") !== "understood");
-    if (next) setActiveId(next.id);
+    const nxt = all.slice(idx + 1).find((c) => (state.concepts[c.id] ?? "todo") !== "understood");
+    if (nxt) setActiveId(nxt.id);
     else router.navigate({ to: "/" });
   };
 
@@ -90,7 +99,7 @@ function TopicPage() {
         <div className="mt-4 flex max-w-sm items-center gap-3">
           <Progress value={pct} className="flex-1" />
           <span className="shrink-0 whitespace-nowrap text-[0.6875rem] font-semibold tabular-nums text-muted-foreground">
-            {pct}% {t("progress")}
+            {pct}% · {remaining} {t("remaining")}
           </span>
         </div>
       </header>
@@ -98,11 +107,35 @@ function TopicPage() {
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_360px]">
         <section aria-labelledby="branch-title" className="order-2 lg:order-1">
           <Card>
-            <p className="gk-eyebrow">{t("branch")}</p>
-            <h2 id="branch-title" className="mt-2 text-lg leading-snug">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <nav aria-label={t("branch")} className="flex flex-wrap items-center gap-1.5 text-[0.6875rem] font-semibold text-muted-foreground">
+                {path.map((c, i) => (
+                  <span key={c.id} className="flex items-center gap-1.5">
+                    {i > 0 && <span aria-hidden>/</span>}
+                    {i === path.length - 1 ? (
+                      <span className="text-foreground">{L(c.title)}</span>
+                    ) : (
+                      <button onClick={() => setActiveId(c.id)} className="underline decoration-border-strong underline-offset-2 hover:text-foreground">
+                        {L(c.title)}
+                      </button>
+                    )}
+                  </span>
+                ))}
+              </nav>
+              <span className="text-[0.6875rem] font-semibold tabular-nums text-muted-foreground">
+                {t("stepOf")} {stepIndex + 1}/{all.length} · {t("levelLabel")} {level}
+              </span>
+            </div>
+
+            <h2 id="branch-title" className="mt-3 text-lg leading-snug">
               {L(active.title)}
             </h2>
+            <p className="mt-1 text-[0.8125rem] text-muted-foreground">{L(active.question)}</p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{L(active.summary)}</p>
+            <p className="mt-3 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
+              {active.minutes} {t("minutes")} ·{" "}
+              {status === "understood" ? t("understood") : status === "gap" ? t("toReview") : status === "studied" ? t("studied") : t("notStarted")}
+            </p>
 
             <div className="mt-5 gk-rule pt-5">
               <p className="gk-eyebrow">{t("sources")}</p>
@@ -114,7 +147,36 @@ function TopicPage() {
               </div>
             </div>
 
-            <div className="mt-5 flex flex-wrap gap-2">
+            {kids.length > 0 && (
+              <div className="mt-5 gk-rule pt-5">
+                <p className="gk-eyebrow">{t("deeperBranches")}</p>
+                <p className="mt-1.5 text-[0.75rem] text-muted-foreground">{t("deeperHelp")}</p>
+                <ul className="mt-3 space-y-2">
+                  {kids.map((k) => {
+                    const ks = state.concepts[k.id] ?? "todo";
+                    return (
+                      <li key={k.id}>
+                        <button
+                          onClick={() => setActiveId(k.id)}
+                          className="flex w-full items-center justify-between gap-3 rounded-lg border border-border p-3 text-left transition-colors hover:border-border-strong"
+                        >
+                          <span className="min-w-0">
+                            <span className="block text-[0.875rem] font-semibold leading-snug">{L(k.title)}</span>
+                            <span className="mt-0.5 block text-[0.75rem] text-muted-foreground">
+                              {k.minutes} {t("minutes")} ·{" "}
+                              {ks === "understood" ? t("understood") : ks === "gap" ? t("toReview") : t("notStarted")}
+                            </span>
+                          </span>
+                          <span className="shrink-0 text-[0.6875rem] font-semibold text-primary">{t("goDeeper")} →</span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            )}
+
+            <div className="mt-5 flex flex-wrap items-center gap-2">
               <Button
                 variant={status === "todo" ? "outline" : "quiet"}
                 onClick={() => setConcept(active.id, status === "todo" ? "studied" : "todo")}
@@ -123,8 +185,25 @@ function TopicPage() {
               </Button>
               <Button onClick={() => setChecking(true)}>{t("check")}</Button>
             </div>
+
+            <div className="mt-4 flex items-center justify-between gap-2 gk-rule pt-4">
+              <Button variant="ghost" disabled={!prev} onClick={() => prev && setActiveId(prev.id)}>
+                ← {t("prevConcept")}
+              </Button>
+              <Button variant="ghost" disabled={!next} onClick={() => next && setActiveId(next.id)}>
+                {t("nextConcept")} →
+              </Button>
+            </div>
+
+            {remaining === 0 && (
+              <div className="mt-4 rounded-lg border border-primary/40 bg-primary/8 p-4" aria-live="polite">
+                <p className="text-[0.875rem] font-semibold">{t("branchDone")}</p>
+                <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">{t("branchDoneBody")}</p>
+              </div>
+            )}
           </Card>
         </section>
+
 
         <aside aria-labelledby="tree-title" className="order-1 lg:order-2">
           <div className="rounded-lg border border-border bg-surface p-4">
