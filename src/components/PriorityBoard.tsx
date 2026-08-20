@@ -39,7 +39,7 @@ export function TopicCard({
       to="/topic/$id"
       params={{ id: topic.id }}
       className={cn(
-        "group block rounded-lg bg-card px-4 py-3.5 shadow-card transition-colors hover:bg-secondary/70",
+        "group block rounded-lg bg-card px-4 py-3.5 transition-colors hover:bg-secondary/70",
         emphasis && "px-5 py-4",
       )}
     >
@@ -64,11 +64,7 @@ export function TopicCard({
         </svg>
       </div>
 
-      <p className="mt-1 line-clamp-1 text-[0.8125rem] leading-relaxed text-muted-foreground">
-        {L(topic.why)}
-      </p>
-
-      <div className="mt-3.5 flex items-center gap-3">
+      <div className="mt-3 flex items-center gap-3">
         <Progress value={pct} className="h-1 flex-1" />
         <span className="shrink-0 text-[0.6875rem] tabular-nums text-muted-foreground">
           {pct}% · {topic.minutes} {t("minutes")}
