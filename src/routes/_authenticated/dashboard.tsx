@@ -96,10 +96,19 @@ function Today() {
         </header>
 
         {focusTopic && (
-          <section aria-labelledby="focus-title">
-            <h2 id="focus-title" className="gk-eyebrow">
-              {t("focusToday")}
-            </h2>
+          <section aria-labelledby="focus-title" className="gk-panel p-4 sm:p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2 id="focus-title" className="gk-eyebrow">
+                {t("focusToday")}
+              </h2>
+              <Link
+                to="/topic/$id"
+                params={{ id: focusTopic.id }}
+                className="text-[0.75rem] font-semibold text-primary underline-offset-4 hover:underline"
+              >
+                {t("startNow") ?? ""}
+              </Link>
+            </div>
             <div className="mt-3">
               <TopicCard topicId={focusTopic.id} emphasis />
             </div>
