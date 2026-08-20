@@ -64,7 +64,6 @@ function TopicPage() {
   const pct = topicProgress(topic);
 
   const path = conceptPath(topic, active.id);
-  const level = Math.max(1, path.length);
   const stepIndex = all.findIndex((c) => c.id === active.id);
   const doneCount = all.filter((c) => state.concepts[c.id] === "understood").length;
   const remaining = all.length - doneCount;
