@@ -44,11 +44,19 @@ function PlanPage() {
 
   return (
     <AppShell>
-      <header className="mb-6">
-        <p className="gk-eyebrow">{t("plan")}</p>
-        <h1 className="mt-2 text-2xl sm:text-3xl">{t("attention")}</h1>
-        <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">{state.goal}</p>
-      </header>
+      <PageHeader
+        eyebrow={t("plan")}
+        title={t("attention")}
+        description={state.goal}
+        action={
+          <Link to="/start">
+            <Button variant="outline" size="sm">
+              {t("editGoal")}
+            </Button>
+          </Link>
+        }
+        className="mb-8"
+      />
       <PriorityBoard />
     </AppShell>
   );
