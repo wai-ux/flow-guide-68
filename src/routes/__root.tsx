@@ -139,10 +139,12 @@ function RootComponent() {
       <ThemeProvider>
         <LanguageProvider>
           <AuthProvider>
-            <StoreProvider>
-            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-              <Outlet />
-            </StoreProvider>
+            <SubscriptionProvider>
+              <StoreProvider>
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+                <Outlet />
+              </StoreProvider>
+            </SubscriptionProvider>
           </AuthProvider>
         </LanguageProvider>
       </ThemeProvider>
