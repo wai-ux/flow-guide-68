@@ -61,7 +61,7 @@ function SettingsPage() {
   return (
     <AppShell>
       <div className="mx-auto max-w-4xl">
-        <PageHeader eyebrow={t("account")} title={t("settings")} description={t("settingsSub")} className="mb-6" />
+        <PageHeader eyebrow={t("appName")} title={t("settings")} description={t("settingsSub")} className="mb-6" />
 
         <Card className="p-5">
           <h2 className="text-sm font-semibold">{t("account")}</h2>
