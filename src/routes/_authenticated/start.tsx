@@ -196,7 +196,7 @@ function StartPage() {
                   setFileIndex((i) => i + 1);
                   setError(null);
                 }}
-                className="w-full rounded-xl border border-dashed border-border-strong bg-surface px-4 py-8 text-center text-sm font-medium text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
+                className="w-full rounded-lg border border-dashed border-border-strong bg-surface px-4 py-8 text-center text-sm font-medium text-muted-foreground transition-colors hover:border-primary hover:text-foreground"
               >
                 <svg
                   viewBox="0 0 24 24"
