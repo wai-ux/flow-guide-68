@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { Button, Pill } from "@/components/ui/primitives";
+import { Button } from "@/components/ui/primitives";
 import { useAuth } from "@/lib/auth";
 import { useLang } from "@/lib/i18n";
 
