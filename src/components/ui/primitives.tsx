@@ -10,16 +10,16 @@ export function Button({ className, variant = "primary", size = "md", ...props }
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-150 disabled:pointer-events-none disabled:opacity-45",
-        size === "sm" && "px-3 py-1.5 text-[0.8125rem]",
-        size === "md" && "px-4 py-2.5 text-sm",
-        size === "lg" && "px-5 py-3 text-[0.9375rem]",
+        "inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors duration-150 disabled:pointer-events-none disabled:opacity-40",
+        size === "sm" && "h-8 px-3 text-[0.8125rem]",
+        size === "md" && "h-10 px-4 text-sm",
+        size === "lg" && "h-11 px-5 text-[0.9375rem]",
         variant === "primary" &&
-          "bg-primary text-primary-foreground hover:brightness-110",
+          "bg-primary text-primary-foreground shadow-card hover:brightness-105",
         variant === "outline" &&
-          "border border-border-strong bg-card text-foreground hover:bg-secondary active:translate-y-px",
+          "border border-border-strong bg-transparent text-foreground hover:bg-secondary",
         variant === "ghost" && "text-muted-foreground hover:bg-secondary hover:text-foreground",
-        variant === "quiet" && "bg-secondary text-secondary-foreground hover:brightness-95",
+        variant === "quiet" && "bg-secondary text-secondary-foreground hover:brightness-105",
         className,
       )}
       {...props}
