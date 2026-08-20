@@ -45,6 +45,7 @@ function TopicPage() {
   const all = useMemo(() => flatConcepts(topic), [topic]);
   const [activeId, setActiveId] = useState(all[0]?.id ?? "");
   const [checking, setChecking] = useState(false);
+  const [showAllSources, setShowAllSources] = useState(false);
   const active = all.find((c) => c.id === activeId) ?? all[0];
 
   if (!active) {
@@ -137,11 +138,21 @@ function TopicPage() {
               {status === "understood" ? t("understood") : status === "gap" ? t("toReview") : status === "studied" ? t("studied") : t("notStarted")}
             </p>
 
-            <div className="mt-5 gk-rule pt-5">
-              <p className="gk-eyebrow">{t("sources")}</p>
+            <div className="mt-6 gk-rule pt-5">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <p className="gk-eyebrow">{t("sources")}</p>
+                {activeSources.length > 2 && (
+                  <button
+                    onClick={() => setShowAllSources((v) => !v)}
+                    className="text-[0.75rem] font-semibold text-primary underline-offset-4 hover:underline"
+                  >
+                    {showAllSources ? t("collapseAll") : `${t("expandAll")} (${activeSources.length})`}
+                  </button>
+                )}
+              </div>
               <p className="mt-1.5 text-[0.75rem] text-muted-foreground">{t("sourcesHelp")}</p>
-              <div className="mt-3 space-y-2.5">
-                {activeSources.map((s) => (
+              <div className="mt-2 space-y-1">
+                {(showAllSources ? activeSources : activeSources.slice(0, 2)).map((s) => (
                   <SourceRow key={s.id} source={s} />
                 ))}
               </div>
@@ -158,7 +169,7 @@ function TopicPage() {
                       <li key={k.id}>
                         <button
                           onClick={() => setActiveId(k.id)}
-                          className="flex w-full items-center justify-between gap-3 rounded-lg border border-border p-3 text-left transition-colors hover:border-border-strong"
+                          className="flex w-full items-center justify-between gap-3 gk-row bg-card px-3.5 py-3 text-left shadow-card"
                         >
                           <span className="min-w-0">
                             <span className="block text-[0.875rem] font-semibold leading-snug">{L(k.title)}</span>
@@ -196,7 +207,7 @@ function TopicPage() {
             </div>
 
             {remaining === 0 && (
-              <div className="mt-4 rounded-lg border border-primary/40 bg-primary/8 p-4" aria-live="polite">
+              <div className="mt-4 rounded-lg border border-primary/30 bg-primary/8 p-4" aria-live="polite">
                 <p className="text-[0.875rem] font-semibold">{t("branchDone")}</p>
                 <p className="mt-1 text-[0.8125rem] leading-relaxed text-muted-foreground">{t("branchDoneBody")}</p>
               </div>
@@ -206,7 +217,7 @@ function TopicPage() {
 
 
         <aside aria-labelledby="tree-title" className="order-1 lg:order-2">
-          <div className="rounded-lg border border-border bg-surface p-4">
+          <div className="gk-panel p-4 lg:sticky lg:top-20">
             <h2 id="tree-title" className="gk-eyebrow">
               {t("branch")}
             </h2>

@@ -66,12 +66,12 @@ export function UnderstandingCheck({
   const child = concept.children?.[0];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-end justify-center bg-foreground/35 p-0 backdrop-blur-sm sm:items-center sm:p-6">
+    <div className="fixed inset-0 z-50 flex items-end justify-center bg-background/70 p-0 backdrop-blur-sm sm:items-center sm:p-6">
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="check-title"
-        className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-xl border border-border bg-card p-6 sm:rounded-xl"
+        className="max-h-[92vh] w-full max-w-xl overflow-y-auto rounded-t-xl border border-border bg-card p-6 shadow-lift sm:rounded-xl sm:p-7"
       >
         <div className="flex items-start justify-between gap-3">
           <div>
@@ -94,7 +94,7 @@ export function UnderstandingCheck({
         {phase === "ask" && (
           <div className="mt-5">
             <p className="text-sm leading-relaxed text-muted-foreground">{t("checkHelp")}</p>
-            <p className="mt-4 rounded-xl border-l-2 border-primary bg-surface p-4 text-[0.9375rem] font-semibold leading-relaxed">
+            <p className="mt-4 rounded-lg border-l-2 border-primary bg-surface px-4 py-3.5 text-[1rem] font-semibold leading-relaxed">
               {L(concept.prompt)}
             </p>
             <Textarea
@@ -132,7 +132,7 @@ export function UnderstandingCheck({
           <div className="mt-5" aria-live="polite">
             <Pill tone="primary">{t("solid")}</Pill>
             <p className="mt-3 text-sm leading-relaxed">{t("solidBody")}</p>
-            <p className="mt-3 rounded-xl bg-surface p-4 text-[0.8125rem] leading-relaxed text-muted-foreground">
+            <p className="mt-3 rounded-lg bg-surface p-4 text-[0.8125rem] leading-relaxed text-muted-foreground">
               {L(concept.expects)}
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
@@ -149,7 +149,7 @@ export function UnderstandingCheck({
             <Pill tone="urgent">{t("gapFound")}</Pill>
             <p className="mt-3 text-sm leading-relaxed">{L(concept.gap)}</p>
 
-            <div className="mt-4 rounded-xl border border-border bg-surface p-4">
+            <div className="mt-4 gk-panel p-4">
               <p className="gk-eyebrow">{t("microBranch")}</p>
               <p className="mt-2 text-[0.9375rem] font-semibold">{L(concept.gapFix)}</p>
               <p className="mt-1.5 text-[0.8125rem] leading-relaxed text-muted-foreground">{L(concept.expects)}</p>

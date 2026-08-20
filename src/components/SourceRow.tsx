@@ -30,34 +30,34 @@ export function SourceRow({ source }: { source: Source }) {
         </svg>
       </span>
       <span className="min-w-0 flex-1">
-        <span className="flex flex-wrap items-center gap-1.5">
-          <span className="rounded border border-border px-1.5 py-0.5 text-[0.5625rem] font-bold uppercase tracking-wide text-muted-foreground">
-            {t(kindKey[source.kind])}
-          </span>
+        <span className="block truncate text-[0.875rem] font-semibold leading-snug">{L(source.title)}</span>
+        <span className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.75rem] text-muted-foreground">
+          <span className="font-medium uppercase tracking-wide">{t(kindKey[source.kind])}</span>
           {source.host && (
-            <span className="text-[0.625rem] font-semibold text-primary">{source.host}</span>
+            <>
+              <span aria-hidden className="opacity-50">
+                ·
+              </span>
+              <span>{source.host}</span>
+            </>
           )}
+          <span aria-hidden className="opacity-50">
+            ·
+          </span>
+          <span className="tabular-nums">
+            {source.minutes} {t("minutes")}
+          </span>
         </span>
-        <span className="mt-1 block text-[0.875rem] font-semibold leading-snug">{L(source.title)}</span>
-        <span className="mt-0.5 block text-[0.75rem] text-muted-foreground">{L(source.meta)}</span>
       </span>
-      <span className="ml-auto flex shrink-0 flex-col items-end gap-1">
-        <span className="text-[0.6875rem] font-semibold tabular-nums text-muted-foreground">
-          {source.minutes} {t("minutes")}
-        </span>
-        <span className="text-[0.6875rem] font-semibold text-primary">
-          {external
-            ? source.kind === "video"
-              ? `${t("watch")} ↗`
-              : `${t("read")} ↗`
-            : t("yourFile")}
-        </span>
+      <span className="ml-auto shrink-0 self-center text-[0.75rem] font-semibold text-primary">
+        {external ? (source.kind === "video" ? `${t("watch")} ↗` : `${t("read")} ↗`) : (
+          <span className="text-muted-foreground">{t("yourFile")}</span>
+        )}
       </span>
     </>
   );
 
-  const cls =
-    "flex items-start gap-3 rounded-lg border border-border bg-card p-3.5 transition-colors hover:border-border-strong";
+  const cls = "flex items-start gap-3 gk-row px-3 py-3 sm:px-3.5";
 
   if (!external) return <div className={cls}>{inner}</div>;
 

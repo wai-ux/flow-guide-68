@@ -10,16 +10,16 @@ export function Button({ className, variant = "primary", size = "md", ...props }
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-lg font-semibold transition-all duration-150 disabled:pointer-events-none disabled:opacity-45",
-        size === "sm" && "px-3 py-1.5 text-[0.8125rem]",
-        size === "md" && "px-4 py-2.5 text-sm",
-        size === "lg" && "px-5 py-3 text-[0.9375rem]",
+        "inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors duration-150 disabled:pointer-events-none disabled:opacity-40",
+        size === "sm" && "h-8 px-3 text-[0.8125rem]",
+        size === "md" && "h-10 px-4 text-sm",
+        size === "lg" && "h-11 px-5 text-[0.9375rem]",
         variant === "primary" &&
-          "bg-primary text-primary-foreground hover:brightness-110",
+          "bg-primary text-primary-foreground shadow-card hover:brightness-105",
         variant === "outline" &&
-          "border border-border-strong bg-card text-foreground hover:bg-secondary active:translate-y-px",
+          "border border-border-strong bg-transparent text-foreground hover:bg-secondary",
         variant === "ghost" && "text-muted-foreground hover:bg-secondary hover:text-foreground",
-        variant === "quiet" && "bg-secondary text-secondary-foreground hover:brightness-95",
+        variant === "quiet" && "bg-secondary text-secondary-foreground hover:brightness-105",
         className,
       )}
       {...props}
@@ -58,7 +58,40 @@ export function Textarea({
 }
 
 export function Card({ className, children }: { className?: string; children: ReactNode }) {
-  return <div className={cn("gk-card p-5", className)}>{children}</div>;
+  return <div className={cn("gk-card p-5 shadow-card sm:p-6", className)}>{children}</div>;
+}
+
+/** One consistent page header: where am I, what is this page for, what can I do. */
+export function PageHeader({
+  eyebrow,
+  title,
+  description,
+  action,
+  className,
+}: {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  action?: ReactNode;
+  className?: string;
+}) {
+  return (
+    <header
+      className={cn(
+        "grid gap-4 border-b border-border pb-6 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end",
+        className,
+      )}
+    >
+      <div className="min-w-0">
+        {eyebrow && <p className="gk-eyebrow">{eyebrow}</p>}
+        <h1 className="mt-2 text-[1.5rem] tracking-tight sm:text-[1.75rem]">{title}</h1>
+        {description && (
+          <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground">{description}</p>
+        )}
+      </div>
+      {action && <div className="flex shrink-0 flex-wrap items-center gap-2">{action}</div>}
+    </header>
+  );
 }
 
 export function Pill({
