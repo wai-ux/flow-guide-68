@@ -119,6 +119,32 @@ function StartPage() {
                     {error}
                   </p>
                 )}
+
+                <p className="mt-4 gk-eyebrow">{t("examples")}</p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {(["example1", "example2", "example3"] as const).map((k) => {
+                    const text = t(k);
+                    const active = goal === text;
+                    return (
+                      <button
+                        key={k}
+                        type="button"
+                        aria-pressed={active}
+                        onClick={() => {
+                          setGoal(text);
+                          setError(null);
+                        }}
+                        className={`rounded-lg border px-3 py-1.5 text-left text-[0.8125rem] transition-colors ${
+                          active
+                            ? "border-primary text-foreground"
+                            : "border-border text-muted-foreground hover:border-border-strong hover:text-foreground"
+                        }`}
+                      >
+                        {text}
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
 
               <div className="grid gap-4 sm:grid-cols-2">
