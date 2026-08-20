@@ -55,6 +55,7 @@ function AuthPage() {
   async function onEmailSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
+    setNotice("");
     const parsed = credentials.safeParse({ email, password, name });
     if (!parsed.success) {
       setError(t("authInvalid"));
