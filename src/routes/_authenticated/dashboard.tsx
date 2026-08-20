@@ -63,52 +63,68 @@ function Today() {
 
   return (
     <AppShell>
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <div>
+      <div className="space-y-10 py-2">
+        <header className="space-y-5">
           <p className="gk-eyebrow">{t("greeting")}</p>
-          <h1 className="mt-2 text-2xl leading-tight sm:text-3xl">{t("todayQuestion")}</h1>
-        </div>
-        <div className="min-w-40">
-          <div className="flex items-baseline justify-between gap-2">
-            <span className="gk-eyebrow">{t("progress")}</span>
-            <span className="text-sm font-bold tabular-nums">{overallProgress}%</span>
+          <h1 className="max-w-xl text-3xl leading-[1.15] tracking-tight sm:text-[2.5rem]">
+            {t("todayQuestion")}
+          </h1>
+
+          <div className="grid gap-4 rounded-2xl bg-surface p-4 sm:grid-cols-[minmax(0,1fr)_14rem] sm:items-center sm:p-5">
+            <div className="min-w-0">
+              <p className="gk-eyebrow">{t("goalLabel")}</p>
+              <div className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <p className="text-[0.9375rem] font-semibold">{state.goal}</p>
+                <Link to="/start" className="text-[0.75rem] text-primary underline-offset-4 hover:underline">
+                  {t("editGoal")}
+                </Link>
+              </div>
+              <p className="mt-1 text-[0.75rem] text-muted-foreground">
+                {state.resources.length} {t("resourcesCount")} · {state.hours} {t("perDay")}
+              </p>
+            </div>
+            <div className="sm:border-l sm:border-border sm:pl-5">
+              <div className="flex items-baseline justify-between gap-2">
+                <span className="gk-eyebrow">{t("progress")}</span>
+                <span className="text-sm font-bold tabular-nums">{overallProgress}%</span>
+              </div>
+              <Progress value={overallProgress} className="mt-2 h-1" />
+            </div>
           </div>
-          <Progress value={overallProgress} className="mt-2" />
-        </div>
-      </header>
+        </header>
 
-      <section className="mt-6 rounded-lg border border-border bg-surface p-4">
-        <p className="gk-eyebrow">{t("goalLabel")}</p>
-        <div className="mt-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <p className="text-[0.9375rem] font-semibold">{state.goal}</p>
-          <Link to="/start" className="text-[0.75rem] text-primary underline-offset-4 hover:underline">
-            {t("editGoal")}
-          </Link>
-        </div>
-        <p className="mt-1 text-[0.75rem] text-muted-foreground">
-          {state.resources.length} {t("resourcesCount")} · {state.hours} {t("perDay")}
-        </p>
-      </section>
+        {focusTopic && (
+          <section aria-labelledby="focus-title">
+            <h2 id="focus-title" className="gk-eyebrow">
+              {t("focusToday")}
+            </h2>
+            <div className="mt-3">
+              <TopicCard topicId={focusTopic.id} emphasis />
+            </div>
+          </section>
+        )}
 
-      {gapTopics.length > 0 && (
-        <section className="mt-6" aria-labelledby="gaps-title">
-          <h2 id="gaps-title" className="gk-eyebrow">
-            {t("gapFound")}
+        {gapTopics.length > 0 && (
+          <section aria-labelledby="gaps-title">
+            <h2 id="gaps-title" className="gk-eyebrow">
+              {t("gapFound")}
+            </h2>
+            <div className="mt-3 space-y-2">
+              {gapTopics.map((tp) => (
+                <TopicCard key={tp.id} topicId={tp.id} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section aria-labelledby="board-title">
+          <h2 id="board-title" className="mb-4 text-lg tracking-tight">
+            {t("attention")}
           </h2>
-          <div className="mt-3 space-y-2.5">
-            {gapTopics.map((tp) => (
-              <TopicCard key={tp.id} topicId={tp.id} />
-            ))}
-          </div>
+          <PriorityBoard />
         </section>
-      )}
-
-      <section className="mt-8" aria-labelledby="board-title">
-        <h2 id="board-title" className="mb-3 text-lg">
-          {t("attention")}
-        </h2>
-        <PriorityBoard />
-      </section>
+      </div>
     </AppShell>
   );
 }
+
