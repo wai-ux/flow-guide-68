@@ -123,14 +123,13 @@ function TopicPage() {
                 ))}
               </nav>
               <span className="text-[0.6875rem] font-semibold tabular-nums text-muted-foreground">
-                {t("stepOf")} {stepIndex + 1}/{all.length} · {t("levelLabel")} {level}
+                {stepIndex + 1}/{all.length}
               </span>
             </div>
 
             <h2 id="branch-title" className="mt-3 text-lg leading-snug">
               {L(active.title)}
             </h2>
-            <p className="mt-1 text-[0.8125rem] text-muted-foreground">{L(active.question)}</p>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{L(active.summary)}</p>
             <p className="mt-3 text-[0.6875rem] font-semibold uppercase tracking-wide text-muted-foreground">
               {active.minutes} {t("minutes")} ·{" "}
@@ -139,7 +138,7 @@ function TopicPage() {
 
             <div className="mt-6 gk-rule pt-5">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <p className="gk-eyebrow">{t("sources")}</p>
+                <p className="gk-eyebrow">1 · {t("sources")}</p>
                 {activeSources.length > 2 && (
                   <button
                     onClick={() => setShowAllSources((v) => !v)}
@@ -149,7 +148,6 @@ function TopicPage() {
                   </button>
                 )}
               </div>
-              <p className="mt-1.5 text-[0.75rem] text-muted-foreground">{t("sourcesHelp")}</p>
               <div className="mt-2 space-y-1">
                 {(showAllSources ? activeSources : activeSources.slice(0, 2)).map((s) => (
                   <SourceRow key={s.id} source={s} />
