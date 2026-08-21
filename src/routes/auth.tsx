@@ -2,7 +2,7 @@ import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
+
 import { Button, Input, Spinner } from "@/components/ui/primitives";
 import { useAuth } from "@/lib/auth";
 import { useLang } from "@/lib/i18n";
