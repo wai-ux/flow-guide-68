@@ -86,20 +86,15 @@ function AuthPage() {
     }
   }
 
-  async function onGoogle() {
+  /** Temporary: Google provider is bypassed — sign in with a local mock session. */
+  function onGoogle() {
     setError("");
+    setNotice("");
     setBusy("google");
-    const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin,
-      extraParams: { prompt: "select_account" },
-    });
-    if (result.error) {
-      setError(result.error.message ?? t("errorTitle"));
-      setBusy(null);
-      return;
-    }
-    if (result.redirected) return;
+    startDemo();
+    void router.navigate({ to: "/dashboard", replace: true });
   }
+
 
   /** Local demo session: no network, works the same on mobile and desktop. */
   function onDemo() {
